@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#070707">
+<title>Pang Kas – Barbershop Keliling Bursa</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green: #2dff7f;
+    --green-dim: rgba(45, 255, 127, 0.12);
+    --green-border: rgba(45, 255, 127, 0.25);
+    --black: #070707;
+    --surface: #111111;
+    --surface2: #181818;
+    --text: #e8e8e8;
+    --muted: #666;
+    --danger: #ff4f4f;
+  }
+
+- { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+/* ── FORCE DARK — override browser defaults on ALL elements ── */
+html, body, * {
+color-scheme: dark;
+}
+
+body {
+background: var(–black);
+color: var(–text);
+font-family: ‘Syne’, sans-serif;
+overflow-x: hidden;
+}
+
+/* Force dark on ALL input types including date picker */
+input, input[type=“date”], input[type=“time”], input[type=“text”],
+input[type=“password”], input[type=“email”], input[type=“number”],
+select, textarea {
+background: var(–surface) !important;
+background-color: var(–surface) !important;
+color: var(–text) !important;
+color-scheme: dark;
+-webkit-text-fill-color: var(–text) !important;
+}
+
+/* iOS Safari specific override */
+input::-webkit-date-and-time-value { color: var(–text); }
+input[type=“date”]::-webkit-calendar-picker-indicator {
+filter: invert(1) brightness(0.6) sepia(1) hue-rotate(90deg);
+cursor: pointer;
+}
+
+/* Autofill dark override */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+-webkit-box-shadow: 0 0 0 40px var(–surface) inset !important;
+-webkit-text-fill-color: var(–text) !important;
+caret-color: var(–text);
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(–black); }
+::-webkit-scrollbar-thumb { background: var(–green); border-radius: 2px; }
+
+/* ── NAV ── */
+nav {
+position: fixed; top: 0; left: 0; right: 0;
+z-index: 100;
+display: flex; align-items: center; justify-content: space-between;
+padding: 18px 40px;
+background: rgba(7,7,7,0.92);
+backdrop-filter: blur(12px);
+border-bottom: 1px solid var(–green-border);
+}
+
+.nav-logo {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 32px;
+color: #fff;
+letter-spacing: 4px;
+}
+.nav-logo span { color: var(–green); }
+
+.nav-links {
+display: flex; gap: 32px; list-style: none;
+}
+.nav-links a {
+color: var(–muted);
+text-decoration: none;
+font-size: 12px;
+font-weight: 700;
+letter-spacing: 2px;
+text-transform: uppercase;
+transition: color 0.2s;
+font-family: ‘Space Mono’, monospace;
+}
+.nav-links a:hover { color: var(–green); }
+
+.nav-cta {
+background: var(–green);
+color: var(–black);
+padding: 10px 22px;
+font-family: ‘Space Mono’, monospace;
+font-size: 11px;
+font-weight: 700;
+letter-spacing: 2px;
+text-transform: uppercase;
+cursor: pointer;
+border: none;
+transition: opacity 0.2s;
+}
+.nav-cta:hover { opacity: 0.85; }
+
+/* ── HERO ── */
+.hero {
+min-height: 100vh;
+display: flex; align-items: center;
+padding: 100px 40px 60px;
+position: relative;
+overflow: hidden;
+}
+
+.hero-bg-grid {
+position: absolute; inset: 0;
+background-image:
+linear-gradient(rgba(45,255,127,0.04) 1px, transparent 1px),
+linear-gradient(90deg, rgba(45,255,127,0.04) 1px, transparent 1px);
+background-size: 60px 60px;
+pointer-events: none;
+}
+
+.hero-glow {
+position: absolute;
+top: 20%; left: -10%;
+width: 500px; height: 500px;
+background: radial-gradient(circle, rgba(45,255,127,0.08) 0%, transparent 70%);
+pointer-events: none;
+}
+
+.hero-content {
+position: relative; z-index: 1;
+max-width: 760px;
+}
+
+.hero-badge {
+display: inline-flex; align-items: center; gap: 8px;
+border: 1px solid var(–green-border);
+padding: 6px 16px;
+font-family: ‘Space Mono’, monospace;
+font-size: 10px;
+color: var(–green);
+letter-spacing: 3px;
+text-transform: uppercase;
+margin-bottom: 28px;
+}
+
+.hero-badge::before {
+content: ‘’;
+width: 6px; height: 6px;
+background: var(–green);
+border-radius: 50%;
+animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+0%, 100% { opacity: 1; }
+50% { opacity: 0.3; }
+}
+
+.hero-title {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: clamp(72px, 12vw, 140px);
+line-height: 0.9;
+color: #fff;
+letter-spacing: 6px;
+margin-bottom: 8px;
+}
+.hero-title .green { color: var(–green); }
+
+.hero-sub {
+font-size: 16px;
+color: var(–muted);
+letter-spacing: 1px;
+margin-bottom: 40px;
+max-width: 480px;
+line-height: 1.6;
+}
+
+.hero-sub strong { color: var(–text); }
+
+.hero-actions {
+display: flex; gap: 16px; flex-wrap: wrap;
+}
+
+.btn-primary {
+background: var(–green);
+color: var(–black);
+padding: 16px 36px;
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 20px;
+letter-spacing: 3px;
+border: none; cursor: pointer;
+transition: transform 0.15s, box-shadow 0.15s;
+}
+.btn-primary:hover {
+transform: translateY(-2px);
+box-shadow: 0 8px 30px rgba(45,255,127,0.3);
+}
+
+.btn-outline {
+background: transparent;
+color: var(–green);
+padding: 16px 36px;
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 20px;
+letter-spacing: 3px;
+border: 1px solid var(–green-border); cursor: pointer;
+transition: background 0.15s;
+}
+.btn-outline:hover { background: var(–green-dim); }
+
+.hero-stats {
+display: flex; gap: 40px;
+margin-top: 60px;
+padding-top: 40px;
+border-top: 1px solid #1a1a1a;
+}
+
+.stat-num {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 40px;
+color: var(–green);
+line-height: 1;
+}
+.stat-label {
+font-size: 11px;
+color: var(–muted);
+letter-spacing: 2px;
+text-transform: uppercase;
+font-family: ‘Space Mono’, monospace;
+margin-top: 4px;
+}
+
+/* ── SECTION WRAPPER ── */
+section {
+padding: 80px 40px;
+}
+
+.section-tag {
+font-family: ‘Space Mono’, monospace;
+font-size: 10px;
+color: var(–green);
+letter-spacing: 3px;
+text-transform: uppercase;
+margin-bottom: 12px;
+}
+
+.section-title {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: clamp(36px, 6vw, 56px);
+color: #fff;
+letter-spacing: 3px;
+margin-bottom: 8px;
+}
+
+.section-desc {
+font-size: 14px;
+color: var(–muted);
+max-width: 500px;
+line-height: 1.7;
+margin-bottom: 48px;
+}
+
+/* ── PRICING ── */
+#harga { background: var(–surface); }
+
+.price-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+gap: 16px;
+margin-bottom: 32px;
+}
+
+.price-card {
+background: var(–black);
+border: 1px solid #1e1e1e;
+border-top: 3px solid var(–green);
+padding: 28px 24px;
+position: relative;
+transition: transform 0.2s, box-shadow 0.2s;
+}
+.price-card:hover {
+transform: translateY(-4px);
+box-shadow: 0 12px 40px rgba(45,255,127,0.1);
+}
+
+.price-card.popular::before {
+content: ‘POPULER’;
+position: absolute; top: -12px; left: 20px;
+background: var(–green);
+color: var(–black);
+font-family: ‘Space Mono’, monospace;
+font-size: 9px;
+font-weight: 700;
+padding: 3px 10px;
+letter-spacing: 2px;
+}
+
+.price-service {
+font-size: 11px;
+color: var(–muted);
+letter-spacing: 2px;
+text-transform: uppercase;
+font-family: ‘Space Mono’, monospace;
+margin-bottom: 10px;
+}
+
+.price-num {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 56px;
+color: #fff;
+line-height: 1;
+}
+.price-num .currency {
+font-size: 22px;
+color: var(–green);
+vertical-align: super;
+}
+
+.price-note {
+font-size: 11px;
+color: #444;
+font-family: ‘Space Mono’, monospace;
+margin-top: 8px;
+}
+
+.ongkir-table {
+background: var(–black);
+border: 1px solid #1e1e1e;
+overflow: hidden;
+}
+
+.ongkir-header {
+background: var(–green-dim);
+border-bottom: 1px solid var(–green-border);
+padding: 12px 24px;
+font-family: ‘Space Mono’, monospace;
+font-size: 10px;
+color: var(–green);
+letter-spacing: 3px;
+text-transform: uppercase;
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+}
+
+.ongkir-row {
+padding: 14px 24px;
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+border-bottom: 1px solid #111;
+font-size: 13px;
+transition: background 0.15s;
+}
+.ongkir-row:hover { background: rgba(255,255,255,0.02); }
+.ongkir-row .fee-col {
+color: var(–green);
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 22px;
+}
+
+/* ── FEATURES ── */
+.features-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+gap: 20px;
+}
+
+.feature-card {
+background: var(–surface);
+border: 1px solid #1e1e1e;
+border-left: 3px solid var(–green);
+padding: 24px;
+transition: border-color 0.2s;
+}
+.feature-card:hover { border-left-color: var(–green); background: var(–surface2); }
+
+.feat-icon {
+width: 36px; height: 36px;
+background: var(–green-dim);
+border: 1px solid var(–green-border);
+display: flex; align-items: center; justify-content: center;
+font-size: 16px;
+margin-bottom: 16px;
+}
+
+.feat-title {
+font-size: 15px;
+font-weight: 800;
+color: #fff;
+margin-bottom: 6px;
+}
+
+.feat-desc {
+font-size: 12px;
+color: var(–muted);
+line-height: 1.6;
+}
+
+/* ── BOOKING FORM ── */
+#booking { background: var(–surface); }
+
+.booking-wrapper {
+display: grid;
+grid-template-columns: 1fr 1.6fr;
+gap: 48px;
+align-items: start;
+}
+
+.booking-info .info-item {
+display: flex; gap: 14px; align-items: flex-start;
+margin-bottom: 20px;
+}
+
+.info-icon {
+width: 32px; height: 32px;
+background: var(–green);
+color: var(–black);
+display: flex; align-items: center; justify-content: center;
+font-size: 14px;
+flex-shrink: 0;
+font-weight: 700;
+}
+
+.info-text strong {
+display: block;
+font-size: 13px;
+font-weight: 700;
+color: #fff;
+margin-bottom: 2px;
+}
+
+.info-text span {
+font-size: 12px;
+color: var(–muted);
+font-family: ‘Space Mono’, monospace;
+}
+
+.form-card {
+background: var(–black);
+border: 1px solid #1e1e1e;
+padding: 36px;
+}
+
+.form-title {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 28px;
+color: #fff;
+letter-spacing: 3px;
+margin-bottom: 24px;
+border-bottom: 1px solid #1a1a1a;
+padding-bottom: 16px;
+}
+
+.form-row {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 16px;
+}
+
+.form-group {
+margin-bottom: 18px;
+}
+
+.form-group.full { grid-column: span 2; }
+
+label {
+display: block;
+font-family: ‘Space Mono’, monospace;
+font-size: 10px;
+color: var(–green);
+letter-spacing: 2px;
+text-transform: uppercase;
+margin-bottom: 7px;
+}
+
+input, select, textarea {
+width: 100%;
+background: var(–surface);
+border: 1px solid #222;
+border-bottom: 2px solid #333;
+color: var(–text);
+padding: 12px 14px;
+font-family: ‘Syne’, sans-serif;
+font-size: 14px;
+outline: none;
+transition: border-color 0.2s;
+-webkit-appearance: none;
+appearance: none;
+}
+
+input:focus, select:focus, textarea:focus {
+border-bottom-color: var(–green);
+}
+
+select {
+background-image: url(“data:image/svg+xml,%3Csvg xmlns=‘http://www.w3.org/2000/svg’ width=‘12’ height=‘8’ viewBox=‘0 0 12 8’%3E%3Cpath d=‘M1 1l5 5 5-5’ stroke=’%232dff7f’ stroke-width=‘2’ fill=‘none’/%3E%3C/svg%3E”);
+background-repeat: no-repeat;
+background-position: right 14px center;
+cursor: pointer;
+}
+
+select option { background: var(–surface2); }
+
+textarea { resize: vertical; min-height: 80px; }
+
+.radio-group {
+display: flex; gap: 12px;
+}
+
+.radio-option {
+flex: 1;
+position: relative;
+}
+
+.radio-option input[type=“radio”] {
+position: absolute; opacity: 0; width: 0;
+}
+
+.radio-label {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+padding: 12px;
+border: 1px solid #222;
+cursor: pointer;
+font-size: 12px;
+font-weight: 700;
+color: var(–muted);
+transition: all 0.15s;
+text-align: center;
+}
+
+.radio-option input[type=“radio”]:checked + .radio-label {
+border-color: var(–green);
+color: var(–green);
+background: var(–green-dim);
+}
+
+.ongkir-notice {
+display: none;
+background: var(–green-dim);
+border: 1px solid var(–green-border);
+padding: 12px 16px;
+font-size: 12px;
+color: var(–green);
+font-family: ‘Space Mono’, monospace;
+margin-top: 10px;
+margin-bottom: 0;
+}
+
+.ongkir-notice.show { display: block; }
+
+.submit-btn {
+width: 100%;
+background: var(–green);
+color: var(–black);
+border: none;
+padding: 18px;
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 22px;
+letter-spacing: 4px;
+cursor: pointer;
+transition: opacity 0.2s, transform 0.15s;
+margin-top: 8px;
+}
+
+.submit-btn:hover {
+opacity: 0.88;
+transform: translateY(-1px);
+}
+
+/* ── SUCCESS STATE ── */
+.success-message {
+display: none;
+background: var(–green-dim);
+border: 1px solid var(–green-border);
+padding: 24px;
+text-align: center;
+margin-top: 16px;
+}
+
+.success-message.show { display: block; }
+
+.success-message .check {
+font-size: 32px;
+margin-bottom: 8px;
+}
+
+.success-message h3 {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 24px;
+color: var(–green);
+letter-spacing: 2px;
+margin-bottom: 6px;
+}
+
+.success-message p {
+font-size: 12px;
+color: var(–muted);
+font-family: ‘Space Mono’, monospace;
+}
+
+/* ── FOOTER ── */
+footer {
+background: var(–black);
+border-top: 1px solid #111;
+padding: 48px 40px 32px;
+display: grid;
+grid-template-columns: 2fr 1fr 1fr;
+gap: 48px;
+}
+
+.footer-brand .brand {
+font-family: ‘Bebas Neue’, sans-serif;
+font-size: 42px;
+color: #fff;
+letter-spacing: 5px;
+line-height: 1;
+}
+.footer-brand .brand span { color: var(–green); }
+
+.footer-brand p {
+font-size: 12px;
+color: var(–muted);
+margin-top: 12px;
+line-height: 1.7;
+max-width: 300px;
+}
+
+.footer-col h4 {
+font-family: ‘Space Mono’, monospace;
+font-size: 10px;
+color: var(–green);
+letter-spacing: 3px;
+text-transform: uppercase;
+margin-bottom: 16px;
+}
+
+.footer-col a, .footer-col p {
+display: block;
+font-size: 13px;
+color: var(–muted);
+text-decoration: none;
+margin-bottom: 8px;
+transition: color 0.2s;
+line-height: 1.5;
+}
+
+.footer-col a:hover { color: var(–green); }
+
+.footer-bottom {
+padding: 20px 40px;
+border-top: 1px solid #111;
+display: flex; justify-content: space-between; align-items: center;
+}
+
+.footer-bottom p {
+font-size: 11px;
+color: #333;
+font-family: ‘Space Mono’, monospace;
+}
+
+.footer-bottom .green-dot {
+width: 8px; height: 8px;
+background: var(–green);
+border-radius: 50%;
+animation: pulse 2s infinite;
+}
+
+/* ── SLOT GRID ── */
+.slot-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+gap: 8px;
+margin-top: 4px;
+}
+
+.slot-btn {
+padding: 10px 8px;
+background: var(–surface);
+border: 1px solid #222;
+color: var(–text);
+font-family: ‘Space Mono’, monospace;
+font-size: 13px;
+font-weight: 700;
+cursor: pointer;
+transition: all 0.15s;
+text-align: center;
+letter-spacing: 1px;
+}
+
+.slot-btn:hover:not(.taken):not(.selected) {
+border-color: var(–green);
+color: var(–green);
+}
+
+.slot-btn.selected {
+background: var(–green);
+color: var(–black);
+border-color: var(–green);
+}
+
+.slot-btn.taken {
+background: #1a1a1a;
+color: #333;
+border-color: #1a1a1a;
+cursor: not-allowed;
+text-decoration: line-through;
+}
+
+.slot-btn.taken::after {
+content: ’ ✗’;
+font-size: 10px;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+nav { padding: 16px 20px; }
+.nav-links { display: none; }
+section { padding: 60px 20px; }
+.hero { padding: 90px 20px 50px; }
+.booking-wrapper { grid-template-columns: 1fr; }
+.form-row { grid-template-columns: 1fr; }
+.form-group.full { grid-column: span 1; }
+footer { grid-template-columns: 1fr; gap: 32px; padding: 40px 20px 24px; }
+.footer-bottom { padding: 16px 20px; flex-direction: column; gap: 8px; }
+.hero-stats { gap: 24px; flex-wrap: wrap; }
+}
+</style>
+
+</head>
+<body>
+
+<!-- NAV -->
+
+<nav>
+  <div class="nav-logo">PANG<span>KAS</span></div>
+  <ul class="nav-links">
+    <li><a href="#harga">Harga</a></li>
+    <li><a href="#keunggulan">Keunggulan</a></li>
+    <li><a href="#booking">Booking</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Book Sekarang</button>
+</nav>
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Tersedia di Bursa, Türkiye</div>
+    <div style="display:inline-block;background:rgba(45,255,127,0.15);border:1px solid var(--green);padding:7px 18px;margin-bottom:20px;font-family:'Space Mono',monospace;font-size:10px;color:var(--green);letter-spacing:2px;">
+      ⚡ MINGGU INI: BUKA SETIAP HARI — JANGAN LEWATKAN!
+    </div>
+    <h1 class="hero-title">PANG<br><span class="green">KAS</span></h1>
+    <p class="hero-sub">
+      Barbershop keliling khusus <strong>WNI & TKI di Bursa</strong>.<br>
+      Harga hemat, barberman berpengalaman — datang ke tempat kamu atau kamu yang ke kami.
+    </p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">BOOKING SEKARANG</button>
+      <button class="btn-outline" onclick="document.getElementById('harga').scrollIntoView({behavior:'smooth'})">LIHAT HARGA</button>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">₺180</div>
+        <div class="stat-label">Mulai dari</div>
+      </div>
+      <div>
+        <div class="stat-num">50%</div>
+        <div class="stat-label">Lebih hemat</div>
+      </div>
+      <div>
+        <div class="stat-num">100%</div>
+        <div class="stat-label">WNI Friendly</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HARGA -->
+
+<section id="harga">
+  <div class="section-tag">// Daftar Harga</div>
+  <h2 class="section-title">HARGA JASA KAMI</h2>
+  <p class="section-desc">Harga transparan, jauh lebih murah dari salon di luar sana. Pas di kantong mahasiswa.</p>
+
+  <div class="price-grid">
+    <div class="price-card popular">
+      <div class="price-service">Potong Rambut</div>
+      <div class="price-num"><span class="currency">₺</span>180</div>
+      <div class="price-note">Datang ke tempat · tanpa ongkir</div>
+    </div>
+    <div class="price-card">
+      <div class="price-service">Precision Cut</div>
+      <div class="price-num"><span class="currency">₺</span>200</div>
+      <div class="price-note">Rambut tipis / khusus · butuh ketelitian ekstra</div>
+    </div>
+    <div class="price-card">
+      <div class="price-service">Anak-anak (Under 12)</div>
+      <div class="price-num"><span class="currency">₺</span>150</div>
+      <div class="price-note">Datang ke tempat · tanpa ongkir</div>
+    </div>
+    <div class="price-card">
+      <div class="price-service">Home Visit</div>
+      <div class="price-num">+Ongkir</div>
+      <div class="price-note">Sesuai zona di bawah</div>
+    </div>
+  </div>
+
+  <div style="margin-top: 16px;">
+    <div class="section-tag" style="margin-bottom: 12px;">// Ongkos Kirim (Home Visit)</div>
+    <div class="ongkir-table">
+      <div class="ongkir-header">
+        <span>ZONA</span>
+        <span>WILAYAH</span>
+        <span>ONGKIR</span>
+      </div>
+      <div class="ongkir-row">
+        <span>Görükle</span>
+        <span style="color:#666;">Dalam Görükle</span>
+        <span class="fee-col">₺50</span>
+      </div>
+      <div class="ongkir-row">
+        <span>Luar Görükle</span>
+        <span style="color:#666;">Area Bursa lainnya</span>
+        <span class="fee-col" style="font-size:14px;color:var(--yellow);">Menyesuaikan</span>
+      </div>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-top:10px;font-family:'Space Mono',monospace;">
+      💡 Tips: Order bareng 2 orang atau lebih di lokasi sama = ongkir bisa patungan!
+    </p>
+  </div>
+</section>
+
+<!-- KEUNGGULAN -->
+
+<section id="keunggulan" style="background:var(--surface);">
+  <div class="section-tag">// Kenapa Pilih Kami?</div>
+  <h2 class="section-title">KEUNGGULAN PANG KAS</h2>
+  <p class="section-desc">Kami bukan cuma tukang cukur biasa.</p>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feat-icon">✂</div>
+      <div class="feat-title">Barberman Berpengalaman</div>
+      <div class="feat-desc">Sudah dikenal dan dipercaya oleh komunitas mahasiswa & TKI di area Bursa.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">💰</div>
+      <div class="feat-title">Harga Khusus Mahasiswa</div>
+      <div class="feat-desc">Mulai ₺180 — hingga 60% lebih murah dari barbershop di luar. Hemat tanpa kompromi kualitas.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">🛵</div>
+      <div class="feat-title">Home Visit Tersedia</div>
+      <div class="feat-desc">Nggak perlu keluar — kami yang datang ke kos, asrama, atau tempat kerja kamu.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">📅</div>
+      <div class="feat-title">Booking Online Mudah</div>
+      <div class="feat-desc">Isi form di website ini, pilih waktu & lokasi, konfirmasi via WhatsApp. Simpel!</div>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">🇮🇩</div>
+      <div class="feat-title">WNI & TKI Friendly</div>
+      <div class="feat-desc">Kami sesama WNI. Komunikasi dalam Bahasa Indonesia, nyaman dan mudah dimengerti.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feat-icon">👥</div>
+      <div class="feat-title">Hemat Kalau Rombongan</div>
+      <div class="feat-desc">Ajak teman, ongkir bisa patungan. Makin rame, makin hemat per orang.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+
+<section id="booking">
+  <div class="section-tag">// Buat Janji Temu</div>
+  <h2 class="section-title">BOOKING SEKARANG</h2>
+  <p class="section-desc">Isi form di bawah, kami akan konfirmasi via WhatsApp dalam waktu singkat.</p>
+
+  <div class="booking-wrapper">
+    <div class="booking-info">
+      <div class="info-item">
+        <div class="info-icon">📞</div>
+        <div class="info-text">
+          <strong>Customer Service</strong>
+          <span>+90 507 610 78 93<br>Tersedia via WhatsApp</span>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">⏰</div>
+        <div class="info-text">
+          <strong>Jam Operasional</strong>
+          <span>Sabtu & Minggu · Fleksibel<br><span style="color:var(--green);font-size:10px;">⚡ Minggu ini: Buka setiap hari!</span></span>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">📍</div>
+        <div class="info-text">
+          <strong>Lokasi Tempat Cukur</strong>
+          <span>Atatürk Bulvarı No:5 D:4<br>Dumlupınar Mah., Nilüfer, Bursa<br><span style="color:var(--green);font-size:10px;">Datang langsung · tanpa ongkir</span></span>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">✅</div>
+        <div class="info-text">
+          <strong>Konfirmasi</strong>
+          <span>Booking dikonfirmasi via<br>WhatsApp dalam 1–2 jam</span>
+        </div>
+      </div>
+      <div style="background: var(--green-dim); border: 1px solid var(--green-border); padding: 16px 18px; margin-top: 8px;">
+        <p style="font-size: 11px; color: var(--green); font-family: 'Space Mono', monospace; line-height: 1.7;">
+          💡 Mau pesan buat 2+ orang<br>di lokasi yang sama?<br>
+          <strong>Ongkir bisa dibagi bareng!</strong>
+        </p>
+      </div>
+    </div>
+
+```
+<div class="form-card">
+  <div class="form-title">FORM BOOKING ✂</div>
+  <div id="bookingForm">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="nama">Nama Lengkap</label>
+        <input type="text" id="nama" placeholder="Nama kamu..." required>
+      </div>
+      <div class="form-group">
+        <label for="wa">Nomor WhatsApp</label>
+        <input type="text" id="wa" placeholder="+62 atau +90...">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="tanggal">Tanggal</label>
+      <input type="date" id="tanggal" required onchange="onTanggalChange()">
+    </div>
+
+    <div class="form-group" id="slotGroup" style="display:none;">
+      <label>Pilih Sesi / Jam</label>
+      <div id="slotGrid" class="slot-grid"></div>
+      <input type="hidden" id="jam">
+    </div>
+
+    <div class="form-group">
+      <label>Jenis Layanan</label>
+      <select id="layanan" required>
+        <option value="">-- Pilih layanan --</option>
+        <option value="potong">Potong Rambut – ₺180</option>
+        <option value="precision">Precision Cut – ₺200</option>
+        <option value="anak">Potong Anak-anak – ₺150</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Jenis Rambut</label>
+      <select id="jenis-rambut">
+        <option value="">-- Pilih jenis rambut --</option>
+        <option value="lurus">Lurus / Straight</option>
+        <option value="bergelombang">Bergelombang / Wavy</option>
+        <option value="keriting">Keriting / Curly</option>
+        <option value="tebal">Tebal / Coarse</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Lokasi Cukur</label>
+      <div class="radio-group">
+        <div class="radio-option">
+          <input type="radio" name="lokasi" id="loc-datang" value="datang" onchange="toggleOngkir(false)">
+          <label class="radio-label" for="loc-datang">🚶 Datang ke Tempat<br><small style="font-weight:400;font-size:10px;">Tanpa ongkir</small></label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="lokasi" id="loc-home" value="homevisit" onchange="toggleOngkir(true)">
+          <label class="radio-label" for="loc-home">🛵 Home Visit<br><small style="font-weight:400;font-size:10px;">+Ongkir sesuai zona</small></label>
+        </div>
+      </div>
+      <div class="ongkir-notice" id="ongkirNotice">
+        📍 Home Visit: Pilih zona ongkir kamu di bawah. Luar Görükle akan dikonfirmasi via WhatsApp.
+      </div>
+    </div>
+
+    <div class="form-group" id="ongkirZonaGroup" style="display:none;">
+      <label>Zona Ongkir</label>
+      <div class="radio-group">
+        <div class="radio-option">
+          <input type="radio" name="ongkir-zona" id="zona-gorukle" value="gorukle">
+          <label class="radio-label" for="zona-gorukle">📍 Görükle<br><small style="font-weight:400;font-size:10px;">+₺50</small></label>
+        </div>
+        <div class="radio-option">
+          <input type="radio" name="ongkir-zona" id="zona-luar" value="luar-gorukle">
+          <label class="radio-label" for="zona-luar">📍 Luar Görükle<br><small style="font-weight:400;font-size:10px;">Menyesuaikan</small></label>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group" id="alamatGroup" style="display:none;">
+      <label for="alamat">Alamat / Lokasi Lengkap</label>
+      <textarea id="alamat" placeholder="Nama jalan, nomor, kelurahan, kecamatan di Bursa..."></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="catatan">Catatan Tambahan (opsional)</label>
+      <textarea id="catatan" placeholder="Model rambut yang diinginkan, request khusus, dll..."></textarea>
+    </div>
+
+    <button class="submit-btn" onclick="submitBooking()">KIRIM BOOKING ✂</button>
+  </div>
+
+  <div class="success-message" id="successMsg">
+    <div class="check">✅</div>
+    <h3>BOOKING TERKIRIM!</h3>
+    <p>Terima kasih! Kami akan menghubungi kamu via WhatsApp untuk konfirmasi jadwal dalam 1–2 jam.<br><br>
+    Pertanyaan? Hubungi kami langsung di <strong style="color:var(--green);">+90 507 610 78 93</strong></p>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-brand">
+    <div class="brand">PANG<span>KAS</span></div>
+    <p>Barbershop keliling khusus WNI & TKI di Bursa, Türkiye. Tampil rapi di mana pun kamu berada.</p>
+  </div>
+  <div class="footer-col">
+    <h4>Navigasi</h4>
+    <a href="#home">Beranda</a>
+    <a href="#harga">Daftar Harga</a>
+    <a href="#keunggulan">Keunggulan</a>
+    <a href="#booking">Booking</a>
+  </div>
+  <div class="footer-col">
+    <h4>Kontak</h4>
+    <p>📱 +90 507 610 78 93</p>
+    <p>💬 WhatsApp tersedia</p>
+    <p>📍 Atatürk Bulvarı No:5, Nilüfer, Bursa</p>
+    <p>🇮🇩 WNI & TKI Friendly</p>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2025 Pang Kas · Bursa, Türkiye · Barbershop Keliling</p>
+  <div class="green-dot"></div>
+</div>
+
+<!-- Firebase Realtime Database SDK -->
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+  import { getDatabase, ref, get, set, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+  // ── FIREBASE CONFIG ──
+  const firebaseConfig = {
+    apiKey: "AIzaSyCqocgPRfOtc7AQX1oW7Vw-KXU1YW-NALA",
+    authDomain: "pang-kas-rambut-bursa.firebaseapp.com",
+    databaseURL: "https://pang-kas-rambut-bursa-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "pang-kas-rambut-bursa",
+    storageBucket: "pang-kas-rambut-bursa.firebasestorage.app",
+    messagingSenderId: "594985271629",
+    appId: "1:594985271629:web:10a023714febc0e6d2f704",
+    measurementId: "G-8JE2GT8N3K"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  // ── SLOT CONFIG ──
+  const SLOTS = ['10:00','10:50','11:40','12:30','13:20','14:10','15:00','15:50','16:40','17:30'];
+
+  let selectedSlot = null;
+  let currentListener = null;
+
+  // ── HELPERS ──
+  function dateKey(dateStr) {
+    // Firebase keys can't have dots or slashes — replace - with _
+    return 'slots_' + dateStr.replace(/-/g, '_');
+  }
+
+  // ── LOAD SLOTS (realtime listener) ──
+  window.loadSlots = async function() {
+    const dateStr = document.getElementById('tanggal').value;
+    if (!dateStr) return;
+
+    selectedSlot = null;
+    document.getElementById('jam').value = '';
+
+    const group = document.getElementById('slotGroup');
+    const grid = document.getElementById('slotGrid');
+    group.style.display = 'block';
+    grid.innerHTML = '<p style="font-size:11px;color:var(--muted);font-family:\'Space Mono\',monospace;padding:8px 0;">⏳ Memuat slot...</p>';
+
+    // Remove previous listener if any
+    if (currentListener) currentListener();
+
+    const slotRef = ref(db, 'bookings/' + dateKey(dateStr));
+
+    // onValue = realtime: slot langsung update kalau ada orang lain booking
+    currentListener = onValue(slotRef, (snapshot) => {
+      const bookedData = snapshot.val() || {};
+      renderSlots(dateStr, bookedData);
+    });
+  }
+
+  function renderSlots(dateStr, bookedData) {
+    const grid = document.getElementById('slotGrid');
+    grid.innerHTML = '';
+
+    const todayStr = new Date().toISOString().split('T')[0];
+    // Use Turkey time (UTC+3) for "now"
+    const nowTR = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
+    const nowMinutes = dateStr === todayStr ? (nowTR.getHours() * 60 + nowTR.getMinutes()) : 0;
+
+    SLOTS.forEach(slot => {
+      const [h, m] = slot.split(':').map(Number);
+      const slotMinutes = h * 60 + m;
+      const isPast = dateStr === todayStr && slotMinutes <= nowMinutes;
+      const isTaken = bookedData[slot.replace(':', '_')] === true;
+      const isUnavailable = isPast || isTaken;
+
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'slot-btn' + (isUnavailable ? ' taken' : '');
+      btn.textContent = slot;
+      btn.disabled = isUnavailable;
+      if (isPast && !isTaken) btn.title = 'Waktu sudah lewat';
+      if (isTaken) btn.title = 'Slot ini sudah dipesan';
+
+      if (!isUnavailable) {
+        btn.onclick = () => selectSlot(slot, btn);
+      }
+
+      // Re-apply selected state if this slot was previously selected
+      if (slot === selectedSlot && !isUnavailable) {
+        btn.classList.add('selected');
+      } else if (slot === selectedSlot && isUnavailable) {
+        // Slot was taken while user was filling form
+        selectedSlot = null;
+        document.getElementById('jam').value = '';
+        showSlotAlert('⚠️ Slot ' + slot + ' baru saja diambil. Pilih slot lain ya!');
+      }
+
+      grid.appendChild(btn);
+    });
+  }
+
+  function showSlotAlert(msg) {
+    const grid = document.getElementById('slotGrid');
+    const notice = document.createElement('p');
+    notice.style.cssText = 'font-size:11px;color:#ff6b6b;font-family:Space Mono,monospace;margin-top:8px;padding:8px;border:1px solid #ff6b6b;background:rgba(255,107,107,0.08);';
+    notice.textContent = msg;
+    grid.after(notice);
+    setTimeout(() => notice.remove(), 4000);
+  }
+
+  function selectSlot(slot, btn) {
+    document.querySelectorAll('.slot-btn.selected').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    selectedSlot = slot;
+    document.getElementById('jam').value = slot;
+  }
+
+  // ── TOGGLE ONGKIR ──
+  window.toggleOngkir = function(show) {
+    const notice = document.getElementById('ongkirNotice');
+    const alamat = document.getElementById('alamatGroup');
+    const zonaGroup = document.getElementById('ongkirZonaGroup');
+    if (show) {
+      notice.classList.add('show');
+      alamat.style.display = 'block';
+      zonaGroup.style.display = 'block';
+    } else {
+      notice.classList.remove('show');
+      alamat.style.display = 'none';
+      zonaGroup.style.display = 'none';
+    }
+  }
+
+  // ── SUBMIT BOOKING ──
+  window.submitBooking = async function() {
+    const nama = document.getElementById('nama').value.trim();
+    const wa = document.getElementById('wa').value.trim();
+    const tanggal = document.getElementById('tanggal').value;
+    const jam = document.getElementById('jam').value;
+    const layanan = document.getElementById('layanan').value;
+    const jenisRambut = document.getElementById('jenis-rambut').value;
+    const lokasiEl = document.querySelector('input[name="lokasi"]:checked');
+    const catatan = document.getElementById('catatan').value.trim();
+
+    if (!nama || !tanggal || !jam || !layanan || !lokasiEl) {
+      alert('Mohon lengkapi semua field: Nama, Tanggal, Sesi, Layanan, dan Lokasi.');
+      return;
+    }
+
+    const lokasiVal = lokasiEl.value;
+    let ongkirInfo = '';
+    let alamatVal = '';
+
+    if (lokasiVal === 'homevisit') {
+      const zonaEl = document.querySelector('input[name="ongkir-zona"]:checked');
+      if (!zonaEl) { alert('Mohon pilih zona ongkir.'); return; }
+      const alamatInput = document.getElementById('alamat').value.trim();
+      if (!alamatInput) { alert('Mohon isi alamat untuk Home Visit.'); return; }
+      const zonaLabel = zonaEl.value === 'gorukle' ? 'Görükle (+₺50)' : 'Luar Görükle (Menyesuaikan)';
+      ongkirInfo = `\n🛵 Zona: ${zonaLabel}`;
+      alamatVal = `\n📍 Alamat: ${alamatInput}`;
+    }
+
+    // ── ATOMIC LOCK via Firebase Transaction ──
+    const slotKey = jam.replace(':', '_');
+    const slotRef = ref(db, `bookings/${dateKey(tanggal)}/${slotKey}`);
+
+    const submitBtn = document.querySelector('.submit-btn');
+    submitBtn.textContent = 'MEMPROSES...';
+    submitBtn.disabled = true;
+
+    try {
+      // runTransaction: atomic check-and-set — race condition safe
+      const result = await runTransaction(slotRef, (currentVal) => {
+        if (currentVal === true) {
+          // Slot already taken — abort transaction
+          return undefined;
+        }
+        return true; // Mark as booked
+      });
+
+      if (!result.committed) {
+        alert('Maaf! Slot ' + jam + ' baru saja diambil orang lain. Silakan pilih slot lain.');
+        submitBtn.textContent = 'KIRIM BOOKING ✂';
+        submitBtn.disabled = false;
+        loadSlots();
+        return;
+      }
+
+      // ── Also save full booking detail ──
+      const bookingDetail = {
+        nama, wa: wa || '-', tanggal, jam, layanan,
+        jenisRambut: jenisRambut || '-',
+        lokasi: lokasiVal,
+        ongkirZona: lokasiVal === 'homevisit' ? (document.querySelector('input[name="ongkir-zona"]:checked')?.value || '-') : '-',
+        alamat: lokasiVal === 'homevisit' ? document.getElementById('alamat').value.trim() : '-',
+        catatan: catatan || '-',
+        timestamp: new Date().toISOString()
+      };
+      await set(ref(db, `bookingDetails/${dateKey(tanggal)}/${slotKey}`), bookingDetail);
+
+    } catch(err) {
+      console.error('Firebase error:', err);
+      alert('Terjadi kesalahan koneksi. Coba lagi ya.');
+      submitBtn.textContent = 'KIRIM BOOKING ✂';
+      submitBtn.disabled = false;
+      return;
+    }
+
+    // ── Open WhatsApp ──
+    const layananMap = { potong:'Potong Rambut – ₺180', precision:'Precision Cut – ₺200', anak:'Potong Anak-anak – ₺150' };
+    const lokasiLabel = lokasiVal === 'datang' ? '🚶 Datang ke Tempat (tanpa ongkir)' : '🛵 Home Visit';
+    const jenisMap = { lurus:'Lurus/Straight', bergelombang:'Bergelombang/Wavy', keriting:'Keriting/Curly', tebal:'Tebal/Coarse' };
+
+    const msg = `✂ *BOOKING PANG KAS*\n\n👤 Nama: ${nama}\n📱 WA: ${wa || '-'}\n📅 Tanggal: ${tanggal}\n⏰ Sesi: ${jam}\n💈 Layanan: ${layananMap[layanan] || layanan}\n💇 Jenis Rambut: ${jenisMap[jenisRambut] || '-'}\n📌 Lokasi: ${lokasiLabel}${ongkirInfo}${alamatVal}${catatan ? '\n📝 Catatan: ' + catatan : ''}\n\n_Dikirim via website Pang Kas_`;
+
+    window.open(`https://wa.me/905076107893?text=${encodeURIComponent(msg)}`, '_blank');
+
+    document.getElementById('bookingForm').style.display = 'none';
+    document.getElementById('successMsg').classList.add('show');
+    document.getElementById('successMsg').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // ── HARI LIBUR NASIONAL TURKI 2025-2026 ──
+  const HOLIDAYS = new Set([
+    '2025-01-01','2025-03-30','2025-03-31','2025-04-01',
+    '2025-04-23','2025-05-01','2025-05-19',
+    '2025-06-06','2025-06-07','2025-06-08','2025-06-09',
+    '2025-07-15','2025-08-30','2025-10-28','2025-10-29',
+    '2026-01-01','2026-04-23','2026-05-01','2026-05-19',
+    '2026-07-15','2026-08-30','2026-10-29',
+  ]);
+
+  function isAllowedDate(dateStr) {
+    if (!dateStr) return false;
+    const d = new Date(dateStr + 'T12:00:00');
+    const day = d.getDay(); // 0=Sun, 6=Sat
+    return day === 0 || day === 6 || HOLIDAYS.has(dateStr);
+  }
+
+  function showDateWarning() {
+    document.getElementById('dateWarnMsg')?.remove();
+    const input = document.getElementById('tanggal');
+    const msg = document.createElement('p');
+    msg.id = 'dateWarnMsg';
+    msg.style.cssText = 'font-size:11px;color:#ff6b6b;font-family:Space Mono,monospace;margin-top:6px;padding:8px;border:1px solid rgba(255,107,107,0.3);background:rgba(255,107,107,0.06);';
+    msg.textContent = '⚠️ Booking hanya tersedia Sabtu & Minggu. Pilih tanggal lain.';
+    input.after(msg);
+    setTimeout(() => msg.remove(), 5000);
+  }
+
+  // ── SINGLE ENTRY POINT untuk perubahan tanggal ──
+  window.onTanggalChange = function() {
+    const val = document.getElementById('tanggal').value;
+    const slotGroup = document.getElementById('slotGroup');
+
+    // Reset slot state dulu
+    selectedSlot = null;
+    document.getElementById('jam').value = '';
+    slotGroup.style.display = 'none';
+    document.getElementById('slotGrid').innerHTML = '';
+    if (currentListener) { currentListener(); currentListener = null; }
+
+    if (!val) return;
+
+    if (!isAllowedDate(val)) {
+      // Clear the invalid date from input
+      document.getElementById('tanggal').value = '';
+      showDateWarning();
+      return;
+    }
+
+    // Valid → load slots
+    loadSlots();
+  }
+
+  // ── INIT ──
+  const todayStr = new Date().toLocaleDateString('en-CA', { timeZone: 'Europe/Istanbul' });
+  document.getElementById('tanggal').setAttribute('min', todayStr);
+</script>
+
+</body>
+</html>
