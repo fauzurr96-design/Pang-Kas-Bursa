@@ -1066,15 +1066,17 @@ footer { grid-template-columns: 1fr; gap: 32px; padding: 40px 20px 24px; }
 </footer>
 <div class="footer-bottom">
   <p>© 2025 Pang Kas · Bursa, Türkiye · Barbershop Keliling</p>
+  <a href="pangkas-admin.html" style="font-size:10px;color:#222;font-family:'Space Mono',monospace;text-decoration:none;letter-spacing:1px;" title="Admin">⚙</a>
   <div class="green-dot"></div>
 </div>
 
-<!-- Firebase Realtime Database SDK -->
+<!-- Firebase via CDN (non-module, works on all browsers including GitHub Pages) -->
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getDatabase, ref, get, set, onValue, runTransaction } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<script>
   // ── FIREBASE CONFIG ──
   const firebaseConfig = {
     apiKey: "AIzaSyCqocgPRfOtc7AQX1oW7Vw-KXU1YW-NALA",
@@ -1083,45 +1085,36 @@ footer { grid-template-columns: 1fr; gap: 32px; padding: 40px 20px 24px; }
     projectId: "pang-kas-rambut-bursa",
     storageBucket: "pang-kas-rambut-bursa.firebasestorage.app",
     messagingSenderId: "594985271629",
-    appId: "1:594985271629:web:10a023714febc0e6d2f704",
-    measurementId: "G-8JE2GT8N3K"
+    appId: "1:594985271629:web:10a023714febc0e6d2f704"
   };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
 
   // ── SLOT CONFIG ──
   const SLOTS = ['10:00','10:50','11:40','12:30','13:20','14:10','15:00','15:50','16:40','17:30'];
-
   let selectedSlot = null;
   let currentListener = null;
 
-  // ── HELPERS ──
-  function dateKey(dateStr) {
-    // Firebase keys can't have dots or slashes — replace - with _
-    return 'slots_' + dateStr.replace(/-/g, '_');
-  }
+  function dateKey(d) { return 'slots_' + d.replace(/-/g,'_'); }
 
-  // ── LOAD SLOTS (realtime listener) ──
-  window.loadSlots = async function() {
+  // ── LOAD SLOTS ──
+  function loadSlots() {
     const dateStr = document.getElementById('tanggal').value;
     if (!dateStr) return;
 
     selectedSlot = null;
     document.getElementById('jam').value = '';
-
     const group = document.getElementById('slotGroup');
     const grid = document.getElementById('slotGrid');
     group.style.display = 'block';
-    grid.innerHTML = '<p style="font-size:11px;color:var(--muted);font-family:\'Space Mono\',monospace;padding:8px 0;">⏳ Memuat slot...</p>';
+    grid.innerHTML = '<p style="font-size:11px;color:var(--muted);font-family:Space Mono,monospace;padding:8px 0;">⏳ Memuat slot...</p>';
 
-    // Remove previous listener if any
-    if (currentListener) currentListener();
+    if (currentListener) {
+      db.ref('bookings/' + dateKey(dateStr)).off('value', currentListener);
+      currentListener = null;
+    }
 
-    const slotRef = ref(db, 'bookings/' + dateKey(dateStr));
-
-    // onValue = realtime: slot langsung update kalau ada orang lain booking
-    currentListener = onValue(slotRef, (snapshot) => {
+    currentListener = db.ref('bookings/' + dateKey(dateStr)).on('value', function(snapshot) {
       const bookedData = snapshot.val() || {};
       renderSlots(dateStr, bookedData);
     });
@@ -1130,15 +1123,13 @@ footer { grid-template-columns: 1fr; gap: 32px; padding: 40px 20px 24px; }
   function renderSlots(dateStr, bookedData) {
     const grid = document.getElementById('slotGrid');
     grid.innerHTML = '';
-
-    const todayStr = new Date().toISOString().split('T')[0];
-    // Use Turkey time (UTC+3) for "now"
+    const todayStr = new Date().toLocaleDateString('en-CA', { timeZone: 'Europe/Istanbul' });
     const nowTR = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Istanbul' }));
     const nowMinutes = dateStr === todayStr ? (nowTR.getHours() * 60 + nowTR.getMinutes()) : 0;
 
-    SLOTS.forEach(slot => {
-      const [h, m] = slot.split(':').map(Number);
-      const slotMinutes = h * 60 + m;
+    SLOTS.forEach(function(slot) {
+      const parts = slot.split(':');
+      const slotMinutes = parseInt(parts[0]) * 60 + parseInt(parts[1]);
       const isPast = dateStr === todayStr && slotMinutes <= nowMinutes;
       const isTaken = bookedData[slot.replace(':', '_')] === true;
       const isUnavailable = isPast || isTaken;
@@ -1148,45 +1139,31 @@ footer { grid-template-columns: 1fr; gap: 32px; padding: 40px 20px 24px; }
       btn.className = 'slot-btn' + (isUnavailable ? ' taken' : '');
       btn.textContent = slot;
       btn.disabled = isUnavailable;
-      if (isPast && !isTaken) btn.title = 'Waktu sudah lewat';
-      if (isTaken) btn.title = 'Slot ini sudah dipesan';
 
       if (!isUnavailable) {
-        btn.onclick = () => selectSlot(slot, btn);
+        btn.addEventListener('click', function() { selectSlot(slot, btn); });
       }
 
-      // Re-apply selected state if this slot was previously selected
       if (slot === selectedSlot && !isUnavailable) {
         btn.classList.add('selected');
       } else if (slot === selectedSlot && isUnavailable) {
-        // Slot was taken while user was filling form
         selectedSlot = null;
         document.getElementById('jam').value = '';
-        showSlotAlert('⚠️ Slot ' + slot + ' baru saja diambil. Pilih slot lain ya!');
       }
 
       grid.appendChild(btn);
     });
   }
 
-  function showSlotAlert(msg) {
-    const grid = document.getElementById('slotGrid');
-    const notice = document.createElement('p');
-    notice.style.cssText = 'font-size:11px;color:#ff6b6b;font-family:Space Mono,monospace;margin-top:8px;padding:8px;border:1px solid #ff6b6b;background:rgba(255,107,107,0.08);';
-    notice.textContent = msg;
-    grid.after(notice);
-    setTimeout(() => notice.remove(), 4000);
-  }
-
   function selectSlot(slot, btn) {
-    document.querySelectorAll('.slot-btn.selected').forEach(b => b.classList.remove('selected'));
+    document.querySelectorAll('.slot-btn.selected').forEach(function(b) { b.classList.remove('selected'); });
     btn.classList.add('selected');
     selectedSlot = slot;
     document.getElementById('jam').value = slot;
   }
 
   // ── TOGGLE ONGKIR ──
-  window.toggleOngkir = function(show) {
+  function toggleOngkir(show) {
     const notice = document.getElementById('ongkirNotice');
     const alamat = document.getElementById('alamatGroup');
     const zonaGroup = document.getElementById('ongkirZonaGroup');
@@ -1202,7 +1179,7 @@ footer { grid-template-columns: 1fr; gap: 32px; padding: 40px 20px 24px; }
   }
 
   // ── SUBMIT BOOKING ──
-  window.submitBooking = async function() {
+  function submitBooking() {
     const nama = document.getElementById('nama').value.trim();
     const wa = document.getElementById('wa').value.trim();
     const tanggal = document.getElementById('tanggal').value;
@@ -1226,72 +1203,63 @@ footer { grid-template-columns: 1fr; gap: 32px; padding: 40px 20px 24px; }
       if (!zonaEl) { alert('Mohon pilih zona ongkir.'); return; }
       const alamatInput = document.getElementById('alamat').value.trim();
       if (!alamatInput) { alert('Mohon isi alamat untuk Home Visit.'); return; }
-      const zonaLabel = zonaEl.value === 'gorukle' ? 'Görükle (+₺50)' : 'Luar Görükle (Menyesuaikan)';
-      ongkirInfo = `\n🛵 Zona: ${zonaLabel}`;
-      alamatVal = `\n📍 Alamat: ${alamatInput}`;
+      const zonaLabelText = zonaEl.value === 'gorukle' ? 'Görükle (+₺50)' : 'Luar Görükle (Menyesuaikan)';
+      ongkirInfo = '\n🛵 Zona: ' + zonaLabelText;
+      alamatVal = '\n📍 Alamat: ' + alamatInput;
     }
 
-    // ── ATOMIC LOCK via Firebase Transaction ──
     const slotKey = jam.replace(':', '_');
-    const slotRef = ref(db, `bookings/${dateKey(tanggal)}/${slotKey}`);
-
+    const slotRef = db.ref('bookings/' + dateKey(tanggal) + '/' + slotKey);
     const submitBtn = document.querySelector('.submit-btn');
     submitBtn.textContent = 'MEMPROSES...';
     submitBtn.disabled = true;
 
-    try {
-      // runTransaction: atomic check-and-set — race condition safe
-      const result = await runTransaction(slotRef, (currentVal) => {
-        if (currentVal === true) {
-          // Slot already taken — abort transaction
-          return undefined;
-        }
-        return true; // Mark as booked
-      });
-
-      if (!result.committed) {
-        alert('Maaf! Slot ' + jam + ' baru saja diambil orang lain. Silakan pilih slot lain.');
+    // Transaction: atomic lock
+    slotRef.transaction(function(currentVal) {
+      if (currentVal === true) return; // abort
+      return true;
+    }, function(error, committed) {
+      if (error || !committed) {
+        alert('Maaf! Slot ' + jam + ' baru saja diambil. Silakan pilih slot lain.');
         submitBtn.textContent = 'KIRIM BOOKING ✂';
         submitBtn.disabled = false;
         loadSlots();
         return;
       }
 
-      // ── Also save full booking detail ──
+      // Save booking detail
+      const ongkirZonaVal = lokasiVal === 'homevisit'
+        ? (document.querySelector('input[name="ongkir-zona"]:checked')?.value || '-') : '-';
       const bookingDetail = {
-        nama, wa: wa || '-', tanggal, jam, layanan,
-        jenisRambut: jenisRambut || '-',
-        lokasi: lokasiVal,
-        ongkirZona: lokasiVal === 'homevisit' ? (document.querySelector('input[name="ongkir-zona"]:checked')?.value || '-') : '-',
+        nama: nama, wa: wa || '-', tanggal: tanggal, jam: jam, layanan: layanan,
+        jenisRambut: jenisRambut || '-', lokasi: lokasiVal,
+        ongkirZona: ongkirZonaVal,
         alamat: lokasiVal === 'homevisit' ? document.getElementById('alamat').value.trim() : '-',
         catatan: catatan || '-',
         timestamp: new Date().toISOString()
       };
-      await set(ref(db, `bookingDetails/${dateKey(tanggal)}/${slotKey}`), bookingDetail);
+      db.ref('bookingDetails/' + dateKey(tanggal) + '/' + slotKey).set(bookingDetail);
 
-    } catch(err) {
-      console.error('Firebase error:', err);
-      alert('Terjadi kesalahan koneksi. Coba lagi ya.');
-      submitBtn.textContent = 'KIRIM BOOKING ✂';
-      submitBtn.disabled = false;
-      return;
-    }
+      // Send to WhatsApp
+      const layananMap = { potong:'Potong Rambut – ₺180', precision:'Precision Cut – ₺200', anak:'Potong Anak-anak – ₺150' };
+      const lokasiLabelText = lokasiVal === 'datang' ? '🚶 Datang ke Tempat (tanpa ongkir)' : '🛵 Home Visit';
+      const jenisMap = { lurus:'Lurus/Straight', bergelombang:'Bergelombang/Wavy', keriting:'Keriting/Curly', tebal:'Tebal/Coarse' };
+      const msg = '✂ *BOOKING PANG KAS*\n\n👤 Nama: ' + nama +
+        '\n📱 WA: ' + (wa||'-') + '\n📅 Tanggal: ' + tanggal +
+        '\n⏰ Sesi: ' + jam + '\n💈 Layanan: ' + (layananMap[layanan]||layanan) +
+        '\n💇 Jenis Rambut: ' + (jenisMap[jenisRambut]||'-') +
+        '\n📌 Lokasi: ' + lokasiLabelText + ongkirInfo + alamatVal +
+        (catatan ? '\n📝 Catatan: ' + catatan : '') +
+        '\n\n_Dikirim via website Pang Kas_';
 
-    // ── Open WhatsApp ──
-    const layananMap = { potong:'Potong Rambut – ₺180', precision:'Precision Cut – ₺200', anak:'Potong Anak-anak – ₺150' };
-    const lokasiLabel = lokasiVal === 'datang' ? '🚶 Datang ke Tempat (tanpa ongkir)' : '🛵 Home Visit';
-    const jenisMap = { lurus:'Lurus/Straight', bergelombang:'Bergelombang/Wavy', keriting:'Keriting/Curly', tebal:'Tebal/Coarse' };
-
-    const msg = `✂ *BOOKING PANG KAS*\n\n👤 Nama: ${nama}\n📱 WA: ${wa || '-'}\n📅 Tanggal: ${tanggal}\n⏰ Sesi: ${jam}\n💈 Layanan: ${layananMap[layanan] || layanan}\n💇 Jenis Rambut: ${jenisMap[jenisRambut] || '-'}\n📌 Lokasi: ${lokasiLabel}${ongkirInfo}${alamatVal}${catatan ? '\n📝 Catatan: ' + catatan : ''}\n\n_Dikirim via website Pang Kas_`;
-
-    window.open(`https://wa.me/905076107893?text=${encodeURIComponent(msg)}`, '_blank');
-
-    document.getElementById('bookingForm').style.display = 'none';
-    document.getElementById('successMsg').classList.add('show');
-    document.getElementById('successMsg').scrollIntoView({ behavior: 'smooth', block: 'center' });
+      window.open('https://wa.me/905076107893?text=' + encodeURIComponent(msg), '_blank');
+      document.getElementById('bookingForm').style.display = 'none';
+      document.getElementById('successMsg').classList.add('show');
+      document.getElementById('successMsg').scrollIntoView({ behavior:'smooth', block:'center' });
+    });
   }
 
-  // ── HARI LIBUR NASIONAL TURKI 2025-2026 ──
+  // ── HARI LIBUR TURKI ──
   const HOLIDAYS = new Set([
     '2025-01-01','2025-03-30','2025-03-31','2025-04-01',
     '2025-04-23','2025-05-01','2025-05-19',
@@ -1304,43 +1272,33 @@ footer { grid-template-columns: 1fr; gap: 32px; padding: 40px 20px 24px; }
   function isAllowedDate(dateStr) {
     if (!dateStr) return false;
     const d = new Date(dateStr + 'T12:00:00');
-    const day = d.getDay(); // 0=Sun, 6=Sat
+    const day = d.getDay();
     return day === 0 || day === 6 || HOLIDAYS.has(dateStr);
   }
 
   function showDateWarning() {
-    document.getElementById('dateWarnMsg')?.remove();
+    document.getElementById('dateWarnMsg') && document.getElementById('dateWarnMsg').remove();
     const input = document.getElementById('tanggal');
     const msg = document.createElement('p');
     msg.id = 'dateWarnMsg';
     msg.style.cssText = 'font-size:11px;color:#ff6b6b;font-family:Space Mono,monospace;margin-top:6px;padding:8px;border:1px solid rgba(255,107,107,0.3);background:rgba(255,107,107,0.06);';
     msg.textContent = '⚠️ Booking hanya tersedia Sabtu & Minggu. Pilih tanggal lain.';
     input.after(msg);
-    setTimeout(() => msg.remove(), 5000);
+    setTimeout(function() { msg.remove(); }, 5000);
   }
 
-  // ── SINGLE ENTRY POINT untuk perubahan tanggal ──
-  window.onTanggalChange = function() {
+  function onTanggalChange() {
     const val = document.getElementById('tanggal').value;
-    const slotGroup = document.getElementById('slotGroup');
-
-    // Reset slot state dulu
     selectedSlot = null;
     document.getElementById('jam').value = '';
-    slotGroup.style.display = 'none';
+    document.getElementById('slotGroup').style.display = 'none';
     document.getElementById('slotGrid').innerHTML = '';
-    if (currentListener) { currentListener(); currentListener = null; }
-
     if (!val) return;
-
     if (!isAllowedDate(val)) {
-      // Clear the invalid date from input
       document.getElementById('tanggal').value = '';
       showDateWarning();
       return;
     }
-
-    // Valid → load slots
     loadSlots();
   }
 

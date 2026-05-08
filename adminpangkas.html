@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -17,137 +18,139 @@
   body{background:var(--black);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;}
   ::-webkit-scrollbar{width:3px;} ::-webkit-scrollbar-thumb{background:var(--green);}
 
-  /* LOGIN */
-  #loginScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
-  #loginScreen::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(45,255,127,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(45,255,127,.025) 1px,transparent 1px);background-size:50px 50px;}
-  .login-box{position:relative;z-index:1;background:var(--surface);border:1px solid var(--green-border);padding:48px 40px;width:100%;max-width:400px;box-shadow:0 0 80px rgba(45,255,127,.08);}
-  .login-logo{font-family:'Bebas Neue',sans-serif;font-size:52px;color:#fff;letter-spacing:6px;line-height:1;}
-  .login-logo span{color:var(--green);}
-  .login-sub{font-family:'Space Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:3px;text-transform:uppercase;margin:6px 0 36px;}
-  .login-label{font-family:'Space Mono',monospace;font-size:10px;color:var(--green);letter-spacing:2px;text-transform:uppercase;display:block;margin-bottom:8px;}
-  .login-input{width:100%;background:var(--black);border:1px solid #222;border-bottom:2px solid #333;color:var(--text);padding:14px 16px;font-family:'Space Mono',monospace;font-size:16px;letter-spacing:4px;outline:none;transition:border-color .2s;margin-bottom:20px;}
-  .login-input:focus{border-bottom-color:var(--green);}
-  .login-btn{width:100%;background:var(--green);color:var(--black);border:none;padding:16px;font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:4px;cursor:pointer;transition:opacity .2s;}
-  .login-btn:hover{opacity:.85;}
-  .login-error{display:none;background:var(--red-dim);border:1px solid var(--red);color:var(--red);padding:10px 14px;font-family:'Space Mono',monospace;font-size:11px;margin-top:14px;text-align:center;}
-  .login-error.show{display:block;}
+/* LOGIN */
+#loginScreen{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+#loginScreen::before{content:’’;position:absolute;inset:0;background-image:linear-gradient(rgba(45,255,127,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(45,255,127,.025) 1px,transparent 1px);background-size:50px 50px;}
+.login-box{position:relative;z-index:1;background:var(–surface);border:1px solid var(–green-border);padding:48px 40px;width:100%;max-width:400px;box-shadow:0 0 80px rgba(45,255,127,.08);}
+.login-logo{font-family:‘Bebas Neue’,sans-serif;font-size:52px;color:#fff;letter-spacing:6px;line-height:1;}
+.login-logo span{color:var(–green);}
+.login-sub{font-family:‘Space Mono’,monospace;font-size:10px;color:var(–muted);letter-spacing:3px;text-transform:uppercase;margin:6px 0 36px;}
+.login-label{font-family:‘Space Mono’,monospace;font-size:10px;color:var(–green);letter-spacing:2px;text-transform:uppercase;display:block;margin-bottom:8px;}
+.login-input{width:100%;background:var(–black);border:1px solid #222;border-bottom:2px solid #333;color:var(–text);padding:14px 16px;font-family:‘Space Mono’,monospace;font-size:16px;letter-spacing:4px;outline:none;transition:border-color .2s;margin-bottom:20px;}
+.login-input:focus{border-bottom-color:var(–green);}
+.login-btn{width:100%;background:var(–green);color:var(–black);border:none;padding:16px;font-family:‘Bebas Neue’,sans-serif;font-size:22px;letter-spacing:4px;cursor:pointer;transition:opacity .2s;}
+.login-btn:hover{opacity:.85;}
+.login-error{display:none;background:var(–red-dim);border:1px solid var(–red);color:var(–red);padding:10px 14px;font-family:‘Space Mono’,monospace;font-size:11px;margin-top:14px;text-align:center;}
+.login-error.show{display:block;}
 
-  /* DASHBOARD */
-  #dashboard{display:none;}
-  .admin-nav{position:sticky;top:0;z-index:50;background:rgba(7,7,7,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--green-border);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;}
-  .admin-logo{font-family:'Bebas Neue',sans-serif;font-size:26px;color:#fff;letter-spacing:4px;}
-  .admin-logo span{color:var(--green);}
-  .admin-badge{background:var(--green-dim);border:1px solid var(--green-border);color:var(--green);font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;padding:4px 10px;text-transform:uppercase;}
-  .live-dot{display:flex;align-items:center;gap:6px;font-family:'Space Mono',monospace;font-size:10px;color:var(--green);}
-  .live-dot::before{content:'';width:7px;height:7px;background:var(--green);border-radius:50%;animation:pulse 2s infinite;}
-  @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
-  @keyframes spin{to{transform:rotate(360deg);}}
-  .logout-btn{background:transparent;border:1px solid #2a2a2a;color:var(--muted);padding:7px 16px;font-family:'Space Mono',monospace;font-size:10px;cursor:pointer;transition:all .2s;}
-  .logout-btn:hover{border-color:var(--red);color:var(--red);}
+/* DASHBOARD */
+#dashboard{display:none;}
+.admin-nav{position:sticky;top:0;z-index:50;background:rgba(7,7,7,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(–green-border);padding:14px 28px;display:flex;align-items:center;justify-content:space-between;}
+.admin-logo{font-family:‘Bebas Neue’,sans-serif;font-size:26px;color:#fff;letter-spacing:4px;}
+.admin-logo span{color:var(–green);}
+.admin-badge{background:var(–green-dim);border:1px solid var(–green-border);color:var(–green);font-family:‘Space Mono’,monospace;font-size:9px;letter-spacing:2px;padding:4px 10px;text-transform:uppercase;}
+.live-dot{display:flex;align-items:center;gap:6px;font-family:‘Space Mono’,monospace;font-size:10px;color:var(–green);}
+.live-dot::before{content:’’;width:7px;height:7px;background:var(–green);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.3;}}
+@keyframes spin{to{transform:rotate(360deg);}}
+.logout-btn{background:transparent;border:1px solid #2a2a2a;color:var(–muted);padding:7px 16px;font-family:‘Space Mono’,monospace;font-size:10px;cursor:pointer;transition:all .2s;}
+.logout-btn:hover{border-color:var(–red);color:var(–red);}
 
-  /* TABS */
-  .tabs{display:flex;border-bottom:1px solid #1a1a1a;background:var(--surface);padding:0 28px;overflow-x:auto;}
-  .tab-btn{padding:14px 22px;font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);border:none;background:transparent;cursor:pointer;border-bottom:3px solid transparent;transition:all .15s;margin-bottom:-1px;white-space:nowrap;}
-  .tab-btn.active{color:var(--green);border-bottom-color:var(--green);}
-  .tab-btn:hover:not(.active){color:var(--text);}
+/* TABS */
+.tabs{display:flex;border-bottom:1px solid #1a1a1a;background:var(–surface);padding:0 28px;overflow-x:auto;}
+.tab-btn{padding:14px 22px;font-family:‘Space Mono’,monospace;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(–muted);border:none;background:transparent;cursor:pointer;border-bottom:3px solid transparent;transition:all .15s;margin-bottom:-1px;white-space:nowrap;}
+.tab-btn.active{color:var(–green);border-bottom-color:var(–green);}
+.tab-btn:hover:not(.active){color:var(–text);}
 
-  .admin-main{padding:28px;max-width:1300px;margin:0 auto;}
-  .tab-panel{display:none;}
-  .tab-panel.active{display:block;}
+.admin-main{padding:28px;max-width:1300px;margin:0 auto;}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
 
-  /* STATS */
-  .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px;}
-  .stat-card{background:var(--surface);border:1px solid #1a1a1a;border-top:3px solid var(--green);padding:18px 20px;}
-  .stat-card.red{border-top-color:var(--red);} .stat-card.yellow{border-top-color:var(--yellow);} .stat-card.blue{border-top-color:var(--blue);}
-  .stat-label{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
-  .stat-num{font-family:'Bebas Neue',sans-serif;font-size:40px;line-height:1;color:#fff;}
-  .stat-num.green{color:var(--green);} .stat-num.red{color:var(--red);} .stat-num.yellow{color:var(--yellow);} .stat-num.blue{color:var(--blue);}
-  .stat-sub{font-size:10px;color:var(--muted);margin-top:4px;font-family:'Space Mono',monospace;}
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px;}
+.stat-card{background:var(–surface);border:1px solid #1a1a1a;border-top:3px solid var(–green);padding:18px 20px;}
+.stat-card.red{border-top-color:var(–red);} .stat-card.yellow{border-top-color:var(–yellow);} .stat-card.blue{border-top-color:var(–blue);}
+.stat-label{font-family:‘Space Mono’,monospace;font-size:9px;color:var(–muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+.stat-num{font-family:‘Bebas Neue’,sans-serif;font-size:40px;line-height:1;color:#fff;}
+.stat-num.green{color:var(–green);} .stat-num.red{color:var(–red);} .stat-num.yellow{color:var(–yellow);} .stat-num.blue{color:var(–blue);}
+.stat-sub{font-size:10px;color:var(–muted);margin-top:4px;font-family:‘Space Mono’,monospace;}
 
-  /* CONTROLS */
-  .controls-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;gap:12px;flex-wrap:wrap;}
-  .section-heading{font-family:'Bebas Neue',sans-serif;font-size:26px;color:#fff;letter-spacing:3px;}
-  .date-nav{display:flex;align-items:center;gap:8px;}
-  .date-nav-btn{background:var(--surface);border:1px solid #222;color:var(--text);width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;transition:all .15s;}
-  .date-nav-btn:hover{border-color:var(--green);color:var(--green);}
-  input[type="date"]{background:var(--surface);border:1px solid #222;color:var(--text);padding:8px 12px;font-family:'Space Mono',monospace;font-size:12px;outline:none;}
-  .action-btn{padding:8px 18px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;cursor:pointer;text-transform:uppercase;transition:all .15s;}
-  .btn-green{background:var(--green-dim);border:1px solid var(--green-border);color:var(--green);}
-  .btn-green:hover{background:rgba(45,255,127,.2);}
+/* CONTROLS */
+.controls-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;gap:12px;flex-wrap:wrap;}
+.section-heading{font-family:‘Bebas Neue’,sans-serif;font-size:26px;color:#fff;letter-spacing:3px;}
+.date-nav{display:flex;align-items:center;gap:8px;}
+.date-nav-btn{background:var(–surface);border:1px solid #222;color:var(–text);width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;transition:all .15s;}
+.date-nav-btn:hover{border-color:var(–green);color:var(–green);}
+input[type=“date”]{background:var(–surface);border:1px solid #222;color:var(–text);padding:8px 12px;font-family:‘Space Mono’,monospace;font-size:12px;outline:none;}
+.action-btn{padding:8px 18px;font-family:‘Space Mono’,monospace;font-size:10px;letter-spacing:1px;cursor:pointer;text-transform:uppercase;transition:all .15s;}
+.btn-green{background:var(–green-dim);border:1px solid var(–green-border);color:var(–green);}
+.btn-green:hover{background:rgba(45,255,127,.2);}
 
-  /* TIMELINE */
-  .timeline-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:32px;}
-  .slot-card{background:var(--surface);border:1px solid #1a1a1a;border-left:4px solid #222;padding:16px 18px;}
-  .slot-card.booked{border-left-color:var(--green);background:rgba(45,255,127,.02);}
-  .slot-card.past{opacity:.35;} .slot-card.empty{opacity:.5;}
-  .slot-time{font-family:'Bebas Neue',sans-serif;font-size:30px;color:#fff;letter-spacing:2px;line-height:1;}
-  .slot-card.booked .slot-time{color:var(--green);}
-  .slot-badge{display:inline-block;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;margin:6px 0 10px;}
-  .badge-booked{background:var(--green-dim);color:var(--green);border:1px solid var(--green-border);}
-  .badge-empty{background:#111;color:#333;border:1px solid #1e1e1e;}
-  .badge-past{background:#0d0d0d;color:#2a2a2a;border:1px solid #111;}
-  .booking-info{display:none;border-top:1px solid #1a1a1a;padding-top:10px;}
-  .slot-card.booked .booking-info{display:block;}
-  .info-row{display:flex;gap:8px;margin-bottom:5px;font-size:12px;align-items:flex-start;}
-  .info-key{font-family:'Space Mono',monospace;color:var(--muted);font-size:10px;min-width:65px;flex-shrink:0;margin-top:1px;}
-  .info-val{color:var(--text);line-height:1.4;word-break:break-word;}
-  .info-val.green{color:var(--green);} .info-val.yellow{color:var(--yellow);}
-  .wa-link{color:var(--green);text-decoration:none;font-family:'Space Mono',monospace;font-size:11px;}
-  .wa-link:hover{text-decoration:underline;}
-  .cancel-slot-btn{margin-top:12px;width:100%;background:transparent;border:1px solid var(--red);color:var(--red);padding:7px;font-family:'Space Mono',monospace;font-size:10px;letter-spacing:1px;cursor:pointer;transition:background .15s;text-transform:uppercase;}
-  .cancel-slot-btn:hover{background:var(--red-dim);}
+/* TIMELINE */
+.timeline-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:32px;}
+.slot-card{background:var(–surface);border:1px solid #1a1a1a;border-left:4px solid #222;padding:16px 18px;}
+.slot-card.booked{border-left-color:var(–green);background:rgba(45,255,127,.02);}
+.slot-card.past{opacity:.35;} .slot-card.empty{opacity:.5;}
+.slot-time{font-family:‘Bebas Neue’,sans-serif;font-size:30px;color:#fff;letter-spacing:2px;line-height:1;}
+.slot-card.booked .slot-time{color:var(–green);}
+.slot-badge{display:inline-block;font-family:‘Space Mono’,monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;padding:3px 8px;margin:6px 0 10px;}
+.badge-booked{background:var(–green-dim);color:var(–green);border:1px solid var(–green-border);}
+.badge-empty{background:#111;color:#333;border:1px solid #1e1e1e;}
+.badge-past{background:#0d0d0d;color:#2a2a2a;border:1px solid #111;}
+.booking-info{display:none;border-top:1px solid #1a1a1a;padding-top:10px;}
+.slot-card.booked .booking-info{display:block;}
+.info-row{display:flex;gap:8px;margin-bottom:5px;font-size:12px;align-items:flex-start;}
+.info-key{font-family:‘Space Mono’,monospace;color:var(–muted);font-size:10px;min-width:65px;flex-shrink:0;margin-top:1px;}
+.info-val{color:var(–text);line-height:1.4;word-break:break-word;}
+.info-val.green{color:var(–green);} .info-val.yellow{color:var(–yellow);}
+.wa-link{color:var(–green);text-decoration:none;font-family:‘Space Mono’,monospace;font-size:11px;}
+.wa-link:hover{text-decoration:underline;}
+.cancel-slot-btn{margin-top:12px;width:100%;background:transparent;border:1px solid var(–red);color:var(–red);padding:7px;font-family:‘Space Mono’,monospace;font-size:10px;letter-spacing:1px;cursor:pointer;transition:background .15s;text-transform:uppercase;}
+.cancel-slot-btn:hover{background:var(–red-dim);}
 
-  /* TABLE */
-  .table-wrap{overflow-x:auto;border:1px solid #1a1a1a;}
-  table{width:100%;border-collapse:collapse;font-size:12px;}
-  thead tr{background:var(--surface2);border-bottom:1px solid var(--green-border);}
-  th{font-family:'Space Mono',monospace;font-size:9px;color:var(--green);letter-spacing:2px;text-transform:uppercase;padding:12px 14px;text-align:left;white-space:nowrap;}
-  td{padding:11px 14px;border-bottom:1px solid #0e0e0e;color:var(--text);vertical-align:top;}
-  tr:last-child td{border-bottom:none;} tr:hover td{background:rgba(255,255,255,.015);}
-  .tag{display:inline-block;padding:2px 8px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;}
-  .tag-green{background:var(--green-dim);color:var(--green);border:1px solid var(--green-border);}
-  .tag-yellow{background:var(--yellow-dim);color:var(--yellow);border:1px solid rgba(255,217,61,.25);}
-  .tag-blue{background:var(--blue-dim);color:var(--blue);border:1px solid rgba(79,163,255,.25);}
-  .tbl-cancel-btn{background:transparent;border:1px solid #2a2a2a;color:var(--muted);padding:5px 10px;font-family:'Space Mono',monospace;font-size:9px;cursor:pointer;transition:all .15s;white-space:nowrap;}
-  .tbl-cancel-btn:hover{border-color:var(--red);color:var(--red);}
+/* TABLE */
+.table-wrap{overflow-x:auto;border:1px solid #1a1a1a;}
+table{width:100%;border-collapse:collapse;font-size:12px;}
+thead tr{background:var(–surface2);border-bottom:1px solid var(–green-border);}
+th{font-family:‘Space Mono’,monospace;font-size:9px;color:var(–green);letter-spacing:2px;text-transform:uppercase;padding:12px 14px;text-align:left;white-space:nowrap;}
+td{padding:11px 14px;border-bottom:1px solid #0e0e0e;color:var(–text);vertical-align:top;}
+tr:last-child td{border-bottom:none;} tr:hover td{background:rgba(255,255,255,.015);}
+.tag{display:inline-block;padding:2px 8px;font-family:‘Space Mono’,monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;}
+.tag-green{background:var(–green-dim);color:var(–green);border:1px solid var(–green-border);}
+.tag-yellow{background:var(–yellow-dim);color:var(–yellow);border:1px solid rgba(255,217,61,.25);}
+.tag-blue{background:var(–blue-dim);color:var(–blue);border:1px solid rgba(79,163,255,.25);}
+.tbl-cancel-btn{background:transparent;border:1px solid #2a2a2a;color:var(–muted);padding:5px 10px;font-family:‘Space Mono’,monospace;font-size:9px;cursor:pointer;transition:all .15s;white-space:nowrap;}
+.tbl-cancel-btn:hover{border-color:var(–red);color:var(–red);}
 
-  /* REVENUE */
-  .revenue-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px;}
-  .rev-card{background:var(--surface);border:1px solid #1a1a1a;padding:20px 22px;border-top:3px solid var(--yellow);}
-  .rev-label{font-family:'Space Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
-  .rev-num{font-family:'Bebas Neue',sans-serif;font-size:38px;line-height:1;color:var(--yellow);}
-  .rev-sub{font-size:10px;color:var(--muted);margin-top:4px;font-family:'Space Mono',monospace;}
-  .breakdown-table{width:100%;border-collapse:collapse;font-size:12px;border:1px solid #1a1a1a;}
-  .breakdown-table th{background:var(--surface2);font-family:'Space Mono',monospace;font-size:9px;color:var(--yellow);letter-spacing:2px;text-transform:uppercase;padding:10px 14px;text-align:left;border-bottom:1px solid rgba(255,217,61,.2);}
-  .breakdown-table td{padding:10px 14px;border-bottom:1px solid #0e0e0e;color:var(--text);}
-  .breakdown-table tr:last-child td{border-bottom:none;font-weight:700;color:var(--yellow);border-top:1px solid rgba(255,217,61,.2);}
+/* REVENUE */
+.revenue-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px;}
+.rev-card{background:var(–surface);border:1px solid #1a1a1a;padding:20px 22px;border-top:3px solid var(–yellow);}
+.rev-label{font-family:‘Space Mono’,monospace;font-size:9px;color:var(–muted);letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+.rev-num{font-family:‘Bebas Neue’,sans-serif;font-size:38px;line-height:1;color:var(–yellow);}
+.rev-sub{font-size:10px;color:var(–muted);margin-top:4px;font-family:‘Space Mono’,monospace;}
+.breakdown-table{width:100%;border-collapse:collapse;font-size:12px;border:1px solid #1a1a1a;}
+.breakdown-table th{background:var(–surface2);font-family:‘Space Mono’,monospace;font-size:9px;color:var(–yellow);letter-spacing:2px;text-transform:uppercase;padding:10px 14px;text-align:left;border-bottom:1px solid rgba(255,217,61,.2);}
+.breakdown-table td{padding:10px 14px;border-bottom:1px solid #0e0e0e;color:var(–text);}
+.breakdown-table tr:last-child td{border-bottom:none;font-weight:700;color:var(–yellow);border-top:1px solid rgba(255,217,61,.2);}
 
-  /* MISC */
-  .loading-state{padding:40px;text-align:center;font-family:'Space Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:2px;}
-  .spinner{width:22px;height:22px;border:2px solid #1e1e1e;border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 14px;}
-  .empty-state{padding:40px;text-align:center;color:var(--muted);font-family:'Space Mono',monospace;font-size:11px;letter-spacing:2px;}
-  .toast{position:fixed;bottom:20px;right:20px;background:var(--surface2);border:1px solid var(--green-border);border-left:4px solid var(--green);padding:12px 18px;font-family:'Space Mono',monospace;font-size:11px;color:var(--green);z-index:999;transform:translateX(120%);transition:transform .3s;max-width:280px;}
-  .toast.show{transform:translateX(0);} .toast.error{border-left-color:var(--red);color:var(--red);border-color:rgba(255,79,79,.3);}
-  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;align-items:center;justify-content:center;}
-  .modal-overlay.show{display:flex;}
-  .modal-box{background:var(--surface);border:1px solid var(--red);padding:32px;max-width:380px;width:90%;}
-  .modal-title{font-family:'Bebas Neue',sans-serif;font-size:24px;color:var(--red);letter-spacing:3px;margin-bottom:12px;}
-  .modal-body{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:24px;font-family:'Space Mono',monospace;}
-  .modal-body strong{color:var(--text);}
-  .modal-actions{display:flex;gap:10px;}
-  .modal-confirm{flex:1;background:var(--red);color:#fff;border:none;padding:12px;font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:3px;cursor:pointer;}
-  .modal-cancel{flex:1;background:transparent;color:var(--muted);border:1px solid #333;padding:12px;font-family:'Space Mono',monospace;font-size:11px;cursor:pointer;transition:all .15s;}
-  .modal-cancel:hover{border-color:var(--text);color:var(--text);}
+/* MISC */
+.loading-state{padding:40px;text-align:center;font-family:‘Space Mono’,monospace;font-size:11px;color:var(–muted);letter-spacing:2px;}
+.spinner{width:22px;height:22px;border:2px solid #1e1e1e;border-top-color:var(–green);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 14px;}
+.empty-state{padding:40px;text-align:center;color:var(–muted);font-family:‘Space Mono’,monospace;font-size:11px;letter-spacing:2px;}
+.toast{position:fixed;bottom:20px;right:20px;background:var(–surface2);border:1px solid var(–green-border);border-left:4px solid var(–green);padding:12px 18px;font-family:‘Space Mono’,monospace;font-size:11px;color:var(–green);z-index:999;transform:translateX(120%);transition:transform .3s;max-width:280px;}
+.toast.show{transform:translateX(0);} .toast.error{border-left-color:var(–red);color:var(–red);border-color:rgba(255,79,79,.3);}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:200;align-items:center;justify-content:center;}
+.modal-overlay.show{display:flex;}
+.modal-box{background:var(–surface);border:1px solid var(–red);padding:32px;max-width:380px;width:90%;}
+.modal-title{font-family:‘Bebas Neue’,sans-serif;font-size:24px;color:var(–red);letter-spacing:3px;margin-bottom:12px;}
+.modal-body{font-size:13px;color:var(–muted);line-height:1.7;margin-bottom:24px;font-family:‘Space Mono’,monospace;}
+.modal-body strong{color:var(–text);}
+.modal-actions{display:flex;gap:10px;}
+.modal-confirm{flex:1;background:var(–red);color:#fff;border:none;padding:12px;font-family:‘Bebas Neue’,sans-serif;font-size:18px;letter-spacing:3px;cursor:pointer;}
+.modal-cancel{flex:1;background:transparent;color:var(–muted);border:1px solid #333;padding:12px;font-family:‘Space Mono’,monospace;font-size:11px;cursor:pointer;transition:all .15s;}
+.modal-cancel:hover{border-color:var(–text);color:var(–text);}
 
-  @media(max-width:768px){
-    .admin-main{padding:16px;} .stats-row{grid-template-columns:1fr 1fr;}
-    .revenue-grid{grid-template-columns:1fr;} .timeline-grid{grid-template-columns:1fr;}
-  }
+@media(max-width:768px){
+.admin-main{padding:16px;} .stats-row{grid-template-columns:1fr 1fr;}
+.revenue-grid{grid-template-columns:1fr;} .timeline-grid{grid-template-columns:1fr;}
+}
 </style>
+
 </head>
 <body>
 
 <!-- LOGIN -->
+
 <div id="loginScreen">
   <div class="login-box">
     <div class="login-logo">PANG<span>KAS</span></div>
@@ -160,6 +163,7 @@
 </div>
 
 <!-- DASHBOARD -->
+
 <div id="dashboard">
   <nav class="admin-nav">
     <div style="display:flex;align-items:center;gap:12px;">
@@ -180,85 +184,88 @@
 
   <div class="admin-main">
 
-    <!-- JADWAL -->
-    <div id="tab-jadwal" class="tab-panel active">
-      <div class="stats-row">
-        <div class="stat-card"><div class="stat-label">Booking Hari Ini</div><div class="stat-num green" id="s-today">–</div><div class="stat-sub">dari 10 slot</div></div>
-        <div class="stat-card yellow"><div class="stat-label">Slot Tersisa</div><div class="stat-num yellow" id="s-remaining">–</div><div class="stat-sub">masih kosong</div></div>
-        <div class="stat-card blue"><div class="stat-label">Tanggal Dipantau</div><div class="stat-num blue" id="s-date" style="font-size:24px;">–</div><div class="stat-sub" id="s-day">–</div></div>
-        <div class="stat-card red"><div class="stat-label">Total Semua Booking</div><div class="stat-num red" id="s-total">–</div><div class="stat-sub">semua tanggal</div></div>
+```
+<!-- JADWAL -->
+<div id="tab-jadwal" class="tab-panel active">
+  <div class="stats-row">
+    <div class="stat-card"><div class="stat-label">Booking Hari Ini</div><div class="stat-num green" id="s-today">–</div><div class="stat-sub">dari 10 slot</div></div>
+    <div class="stat-card yellow"><div class="stat-label">Slot Tersisa</div><div class="stat-num yellow" id="s-remaining">–</div><div class="stat-sub">masih kosong</div></div>
+    <div class="stat-card blue"><div class="stat-label">Tanggal Dipantau</div><div class="stat-num blue" id="s-date" style="font-size:24px;">–</div><div class="stat-sub" id="s-day">–</div></div>
+    <div class="stat-card red"><div class="stat-label">Total Semua Booking</div><div class="stat-num red" id="s-total">–</div><div class="stat-sub">semua tanggal</div></div>
+  </div>
+  <div class="controls-row">
+    <div class="section-heading">SLOT BOOKING</div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+      <div class="date-nav">
+        <button class="date-nav-btn" onclick="changeDate(-1)">‹</button>
+        <input type="date" id="datePicker" onchange="onDateChange()">
+        <button class="date-nav-btn" onclick="changeDate(1)">›</button>
       </div>
-      <div class="controls-row">
-        <div class="section-heading">SLOT BOOKING</div>
-        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-          <div class="date-nav">
-            <button class="date-nav-btn" onclick="changeDate(-1)">‹</button>
-            <input type="date" id="datePicker" onchange="onDateChange()">
-            <button class="date-nav-btn" onclick="changeDate(1)">›</button>
-          </div>
-          <button class="action-btn btn-green" onclick="refreshAll()">↻ Refresh</button>
-        </div>
-      </div>
-      <div id="timelineGrid" class="timeline-grid"><div class="loading-state"><div class="spinner"></div>MEMUAT...</div></div>
+      <button class="action-btn btn-green" onclick="refreshAll()">↻ Refresh</button>
     </div>
+  </div>
+  <div id="timelineGrid" class="timeline-grid"><div class="loading-state"><div class="spinner"></div>MEMUAT...</div></div>
+</div>
 
-    <!-- CUSTOMER -->
-    <div id="tab-customer" class="tab-panel">
-      <div class="controls-row">
-        <div class="section-heading">DATA CUSTOMER</div>
-        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-          <input type="date" id="customerDatePicker" onchange="loadCustomerTable()">
-          <button class="action-btn btn-green" onclick="loadCustomerTable()">↻ Refresh</button>
-        </div>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>Sesi</th><th>Nama</th><th>WhatsApp</th><th>Layanan</th>
-              <th>Jenis Rambut</th><th>Lokasi</th><th>Zona Ongkir</th>
-              <th>Alamat</th><th>Catatan</th><th>Waktu Booking</th><th>Aksi</th>
-            </tr>
-          </thead>
-          <tbody id="customerTableBody">
-            <tr><td colspan="11" class="loading-state"><div class="spinner" style="margin:0 auto;"></div></td></tr>
-          </tbody>
-        </table>
-      </div>
+<!-- CUSTOMER -->
+<div id="tab-customer" class="tab-panel">
+  <div class="controls-row">
+    <div class="section-heading">DATA CUSTOMER</div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+      <input type="date" id="customerDatePicker" onchange="loadCustomerTable()">
+      <button class="action-btn btn-green" onclick="loadCustomerTable()">↻ Refresh</button>
     </div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Sesi</th><th>Nama</th><th>WhatsApp</th><th>Layanan</th>
+          <th>Jenis Rambut</th><th>Lokasi</th><th>Zona Ongkir</th>
+          <th>Alamat</th><th>Catatan</th><th>Waktu Booking</th><th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody id="customerTableBody">
+        <tr><td colspan="11" class="loading-state"><div class="spinner" style="margin:0 auto;"></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-    <!-- PEMASUKAN -->
-    <div id="tab-pemasukan" class="tab-panel">
-      <div class="controls-row">
-        <div class="section-heading">REKAP PEMASUKAN</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;">
-          <input type="date" id="revDatePicker" onchange="loadRevenue()">
-          <button class="action-btn btn-green" onclick="loadRevenue()">↻ Refresh</button>
-        </div>
-      </div>
-      <div class="revenue-grid">
-        <div class="rev-card"><div class="rev-label">Pendapatan Jasa</div><div class="rev-num" id="rev-jasa">₺0</div><div class="rev-sub">dari layanan potong</div></div>
-        <div class="rev-card" style="border-top-color:var(--blue);"><div class="rev-label">Pendapatan Ongkir</div><div class="rev-num" id="rev-ongkir" style="color:var(--blue);">₺0</div><div class="rev-sub">dari home visit</div></div>
-        <div class="rev-card" style="border-top-color:var(--green);"><div class="rev-label">Total Hari Ini</div><div class="rev-num" id="rev-total" style="color:var(--green);">₺0</div><div class="rev-sub">estimasi</div></div>
-      </div>
-      <div class="section-heading" style="font-size:20px;margin-bottom:12px;">BREAKDOWN LAYANAN</div>
-      <table class="breakdown-table">
-        <thead><tr><th>Layanan</th><th>Jumlah</th><th>Harga Satuan</th><th>Subtotal</th></tr></thead>
-        <tbody id="breakdownBody"><tr><td colspan="4" class="empty-state">Pilih tanggal</td></tr></tbody>
-      </table>
-      <div style="margin-top:28px;">
-        <div class="section-heading" style="font-size:20px;margin-bottom:12px;">REKAP SEMUA TANGGAL</div>
-        <table class="breakdown-table">
-          <thead><tr><th>Tanggal</th><th>Jml Booking</th><th>Est. Jasa</th><th>Est. Ongkir</th><th>Est. Total</th></tr></thead>
-          <tbody id="allDatesBody"><tr><td colspan="5" class="loading-state"><div class="spinner" style="margin:0 auto;"></div></td></tr></tbody>
-        </table>
-      </div>
+<!-- PEMASUKAN -->
+<div id="tab-pemasukan" class="tab-panel">
+  <div class="controls-row">
+    <div class="section-heading">REKAP PEMASUKAN</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <input type="date" id="revDatePicker" onchange="loadRevenue()">
+      <button class="action-btn btn-green" onclick="loadRevenue()">↻ Refresh</button>
     </div>
+  </div>
+  <div class="revenue-grid">
+    <div class="rev-card"><div class="rev-label">Pendapatan Jasa</div><div class="rev-num" id="rev-jasa">₺0</div><div class="rev-sub">dari layanan potong</div></div>
+    <div class="rev-card" style="border-top-color:var(--blue);"><div class="rev-label">Pendapatan Ongkir</div><div class="rev-num" id="rev-ongkir" style="color:var(--blue);">₺0</div><div class="rev-sub">dari home visit</div></div>
+    <div class="rev-card" style="border-top-color:var(--green);"><div class="rev-label">Total Hari Ini</div><div class="rev-num" id="rev-total" style="color:var(--green);">₺0</div><div class="rev-sub">estimasi</div></div>
+  </div>
+  <div class="section-heading" style="font-size:20px;margin-bottom:12px;">BREAKDOWN LAYANAN</div>
+  <table class="breakdown-table">
+    <thead><tr><th>Layanan</th><th>Jumlah</th><th>Harga Satuan</th><th>Subtotal</th></tr></thead>
+    <tbody id="breakdownBody"><tr><td colspan="4" class="empty-state">Pilih tanggal</td></tr></tbody>
+  </table>
+  <div style="margin-top:28px;">
+    <div class="section-heading" style="font-size:20px;margin-bottom:12px;">REKAP SEMUA TANGGAL</div>
+    <table class="breakdown-table">
+      <thead><tr><th>Tanggal</th><th>Jml Booking</th><th>Est. Jasa</th><th>Est. Ongkir</th><th>Est. Total</th></tr></thead>
+      <tbody id="allDatesBody"><tr><td colspan="5" class="loading-state"><div class="spinner" style="margin:0 auto;"></div></td></tr></tbody>
+    </table>
+  </div>
+</div>
+```
 
   </div>
 </div>
 
 <!-- MODAL -->
+
 <div class="modal-overlay" id="confirmModal">
   <div class="modal-box">
     <div class="modal-title">BATALKAN BOOKING?</div>
@@ -272,10 +279,11 @@
 
 <div class="toast" id="toast"></div>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getDatabase, ref, get, set, remove, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+<script>
   const firebaseConfig = {
     apiKey: "AIzaSyCqocgPRfOtc7AQX1oW7Vw-KXU1YW-NALA",
     authDomain: "pang-kas-rambut-bursa.firebaseapp.com",
@@ -285,205 +293,153 @@
     messagingSenderId: "594985271629",
     appId: "1:594985271629:web:10a023714febc0e6d2f704"
   };
+  firebase.initializeApp(firebaseConfig);
+  var db = firebase.database();
 
-  const app = initializeApp(firebaseConfig);
-  const db = getDatabase(app);
+  var ADMIN_PASSWORD = "blackpanther96";
+  var SLOTS = ['10:00','10:50','11:40','12:30','13:20','14:10','15:00','15:50','16:40','17:30'];
+  var DAYS_ID = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+  var MONTHS_ID = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+  var HARGA = { potong:180, precision:200, anak:150 };
+  var ONGKIR_MAP = { gorukle:50, 'luar-gorukle':50 };
+  var currentDate = getTodayTR();
+  var activeRef = null;
+  var pendingCancel = null;
 
-  const ADMIN_PASSWORD = "blackpanther96";
-  const SLOTS = ['10:00','10:50','11:40','12:30','13:20','14:10','15:00','15:50','16:40','17:30'];
-  const DAYS_ID = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
-  const MONTHS_ID = ['Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
-  const HARGA = { potong:180, precision:200, anak:150 };
-  const ONGKIR_MAP = { gorukle:30, 'luar-gorukle':50 };
-
-  let currentDate = getTodayTR();
-  let activeUnsub = null;
-  let pendingCancel = null;
-
-  function getTodayTR() {
-    return new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Istanbul'});
-  }
+  function getTodayTR(){ return new Date().toLocaleDateString('en-CA',{timeZone:'Europe/Istanbul'}); }
   function dateKey(d){ return 'slots_'+d.replace(/-/g,'_'); }
-  function formatDate(ds){
-    const d=new Date(ds+'T12:00:00');
-    return `${DAYS_ID[d.getDay()]}, ${d.getDate()} ${MONTHS_ID[d.getMonth()]} ${d.getFullYear()}`;
-  }
-  function getNowMinsTR(){
-    const n=new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Istanbul'}));
-    return n.getHours()*60+n.getMinutes();
-  }
+  function formatDate(ds){ var d=new Date(ds+'T12:00:00'); return DAYS_ID[d.getDay()]+', '+d.getDate()+' '+MONTHS_ID[d.getMonth()]+' '+d.getFullYear(); }
+  function getNowMinsTR(){ var n=new Date(new Date().toLocaleString('en-US',{timeZone:'Europe/Istanbul'})); return n.getHours()*60+n.getMinutes(); }
   function layananLabel(v){ return {potong:'Potong Rambut',precision:'Precision Cut',anak:'Anak-anak'}[v]||v||'-'; }
   function jenisLabel(v){ return {lurus:'Lurus',bergelombang:'Bergelombang',keriting:'Keriting',tebal:'Tebal'}[v]||v||'-'; }
   function lokasiLabel(v){ return v==='homevisit'?'🛵 Home Visit':'🚶 Datang'; }
-  function zonaLabel(v){ if(!v||v==='-')return '-'; return v==='gorukle'?'Görükle (+₺30)':'Luar Görükle (+₺50)'; }
-  function formatTS(ts){
-    if(!ts)return '-';
-    try{ return new Date(ts).toLocaleString('id-ID',{timeZone:'Europe/Istanbul',day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}); }
-    catch(e){ return ts; }
-  }
-  function toast(msg,err=false){
-    const t=document.getElementById('toast');
-    t.textContent=msg; t.className='toast show'+(err?' error':'');
-    clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove('show'),3500);
-  }
+  function zonaLabel(v){ if(!v||v==='-')return '-'; return v==='gorukle'?'Görükle (+₺50)':'Luar Görükle (Menyesuaikan)'; }
+  function formatTS(ts){ if(!ts)return '-'; try{ return new Date(ts).toLocaleString('id-ID',{timeZone:'Europe/Istanbul',day:'2-digit',month:'short',hour:'2-digit',minute:'2-digit'}); }catch(e){ return ts; } }
+  function showToast(msg,err){ var t=document.getElementById('toast'); t.textContent=msg; t.className='toast show'+(err?' error':''); clearTimeout(t._t); t._t=setTimeout(function(){ t.classList.remove('show'); },3500); }
 
-  // LOGIN
-  window.doLogin=function(){
+  function doLogin(){
     if(document.getElementById('pwInput').value===ADMIN_PASSWORD){
       document.getElementById('loginScreen').style.display='none';
       document.getElementById('dashboard').style.display='block';
       init();
     } else {
-      const e=document.getElementById('loginError');
-      e.classList.add('show');
+      var e=document.getElementById('loginError'); e.classList.add('show');
       document.getElementById('pwInput').value='';
-      setTimeout(()=>e.classList.remove('show'),3000);
+      setTimeout(function(){ e.classList.remove('show'); },3000);
     }
-  };
-  window.doLogout=function(){
-    if(activeUnsub){ try{activeUnsub();}catch(e){} activeUnsub=null; }
+  }
+  function doLogout(){
+    if(activeRef){ activeRef.off(); activeRef=null; }
     document.getElementById('dashboard').style.display='none';
     document.getElementById('loginScreen').style.display='flex';
     document.getElementById('pwInput').value='';
-  };
-
-  // TABS
-  window.switchTab=function(name,btn){
-    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  }
+  function switchTab(name,btn){
+    document.querySelectorAll('.tab-panel').forEach(function(p){ p.classList.remove('active'); });
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
     document.getElementById('tab-'+name).classList.add('active');
     btn.classList.add('active');
     if(name==='customer') loadCustomerTable();
     if(name==='pemasukan'){ loadRevenue(); loadAllDatesRevenue(); }
-  };
-
-  function init(){
-    const today=getTodayTR();
-    currentDate=today;
-    ['datePicker','customerDatePicker','revDatePicker'].forEach(id=>{
-      document.getElementById(id).value=today;
-    });
-    loadDate(today);
-    loadTotalCount();
   }
-
-  // DATE NAV
-  window.changeDate=function(delta){
-    const d=new Date(currentDate+'T12:00:00');
-    d.setDate(d.getDate()+delta);
+  function init(){
+    var today=getTodayTR(); currentDate=today;
+    ['datePicker','customerDatePicker','revDatePicker'].forEach(function(id){ document.getElementById(id).value=today; });
+    loadDate(today); loadTotalCount();
+  }
+  function changeDate(delta){
+    var d=new Date(currentDate+'T12:00:00'); d.setDate(d.getDate()+delta);
     currentDate=d.toISOString().split('T')[0];
     document.getElementById('datePicker').value=currentDate;
     loadDate(currentDate);
-  };
-  window.onDateChange=function(){
-    currentDate=document.getElementById('datePicker').value;
-    loadDate(currentDate);
-  };
-  window.refreshAll=function(){ loadDate(currentDate); loadTotalCount(); toast('✓ Data diperbarui'); };
+  }
+  function onDateChange(){ currentDate=document.getElementById('datePicker').value; loadDate(currentDate); }
+  function refreshAll(){ loadDate(currentDate); loadTotalCount(); showToast('✓ Data diperbarui'); }
 
   function loadDate(ds){
     document.getElementById('s-date').textContent=ds.slice(5).replace('-','/');
     document.getElementById('s-day').textContent=formatDate(ds).split(',')[0];
     document.getElementById('timelineGrid').innerHTML='<div class="loading-state"><div class="spinner"></div>MEMUAT...</div>';
-    if(activeUnsub){ try{activeUnsub();}catch(e){} activeUnsub=null; }
-    const r=ref(db,'bookingDetails/'+dateKey(ds));
-    activeUnsub=onValue(r, snap=>{
-      const data=snap.val()||{};
+    if(activeRef){ activeRef.off(); activeRef=null; }
+    activeRef=db.ref('bookingDetails/'+dateKey(ds));
+    activeRef.on('value',function(snap){
+      var data=snap.val()||{};
       renderTimeline(ds,data);
-      const c=Object.keys(data).length;
+      var c=Object.keys(data).length;
       document.getElementById('s-today').textContent=c;
       document.getElementById('s-remaining').textContent=10-c;
-    }, err=>{
-      console.error(err);
-      document.getElementById('timelineGrid').innerHTML='<div class="empty-state">❌ Gagal konek Firebase. Cek koneksi internet.</div>';
-    });
+    },function(err){ console.error(err); document.getElementById('timelineGrid').innerHTML='<div class="empty-state">❌ Gagal konek Firebase.</div>'; });
   }
 
   function loadTotalCount(){
-    get(ref(db,'bookingDetails')).then(snap=>{
-      const d=snap.val()||{};
-      let t=0; Object.values(d).forEach(day=>{ t+=Object.keys(day).length; });
+    db.ref('bookingDetails').get().then(function(snap){
+      var d=snap.val()||{},t=0;
+      Object.values(d).forEach(function(day){ t+=Object.keys(day).length; });
       document.getElementById('s-total').textContent=t;
-    }).catch(()=>{});
+    }).catch(function(){});
   }
 
   function renderTimeline(ds,details){
-    const grid=document.getElementById('timelineGrid');
-    const todayStr=getTodayTR(); const nowMins=getNowMinsTR();
+    var grid=document.getElementById('timelineGrid');
+    var todayStr=getTodayTR(),nowMins=getNowMinsTR();
     grid.innerHTML='';
-    SLOTS.forEach(slot=>{
-      const key=slot.replace(':','_');
-      const b=details[key];
-      const [h,m]=slot.split(':').map(Number);
-      const isPast=ds===todayStr&&(h*60+m)<nowMins;
-      const isBooked=!!b;
-      const card=document.createElement('div');
+    SLOTS.forEach(function(slot){
+      var key=slot.replace(':','_'),b=details[key];
+      var parts=slot.split(':'),isPast=ds===todayStr&&(parseInt(parts[0])*60+parseInt(parts[1]))<nowMins;
+      var isBooked=!!b,card=document.createElement('div');
       card.className='slot-card '+(isBooked?'booked':isPast?'past':'empty');
-      const badge=isBooked
-        ?'<span class="slot-badge badge-booked">✓ Terisi</span>'
-        :isPast?'<span class="slot-badge badge-past">Lewat</span>'
-        :'<span class="slot-badge badge-empty">Kosong</span>';
-      let info='';
+      var badge=isBooked?'<span class="slot-badge badge-booked">✓ Terisi</span>':isPast?'<span class="slot-badge badge-past">Lewat</span>':'<span class="slot-badge badge-empty">Kosong</span>';
+      var info='';
       if(isBooked){
-        const waHtml=b.wa&&b.wa!=='-'
-          ?`<a class="wa-link" href="https://wa.me/${b.wa.replace(/[^0-9]/g,'')}" target="_blank">${b.wa}</a>`
-          :'-';
-        const safeName=(b.nama||'').replace(/'/g,'&#39;');
-        info=`<div class="booking-info">
-          <div class="info-row"><span class="info-key">Nama</span><span class="info-val">${b.nama||'-'}</span></div>
-          <div class="info-row"><span class="info-key">WA</span><span class="info-val">${waHtml}</span></div>
-          <div class="info-row"><span class="info-key">Layanan</span><span class="info-val green">${layananLabel(b.layanan)}</span></div>
-          <div class="info-row"><span class="info-key">Rambut</span><span class="info-val">${jenisLabel(b.jenisRambut)}</span></div>
-          <div class="info-row"><span class="info-key">Lokasi</span><span class="info-val ${b.lokasi==='homevisit'?'yellow':'green'}">${lokasiLabel(b.lokasi)}</span></div>
-          ${b.lokasi==='homevisit'?`<div class="info-row"><span class="info-key">Zona</span><span class="info-val yellow">${zonaLabel(b.ongkirZona)}</span></div>`:''}
-          ${b.alamat&&b.alamat!=='-'?`<div class="info-row"><span class="info-key">Alamat</span><span class="info-val">${b.alamat}</span></div>`:''}
-          ${b.catatan&&b.catatan!=='-'?`<div class="info-row"><span class="info-key">Catatan</span><span class="info-val">${b.catatan}</span></div>`:''}
-          <button class="cancel-slot-btn" onclick="openModal('${ds}','${slot}','${safeName}')">✕ BATALKAN BOOKING INI</button>
-        </div>`;
+        var waHtml=b.wa&&b.wa!=='-'?'<a class="wa-link" href="https://wa.me/'+b.wa.replace(/[^0-9]/g,'')+'\" target="_blank">'+b.wa+'</a>':'-';
+        var safeName=(b.nama||'').replace(/'/g,'&#39;');
+        info='<div class="booking-info">'
+          +'<div class="info-row"><span class="info-key">Nama</span><span class="info-val">'+(b.nama||'-')+'</span></div>'
+          +'<div class="info-row"><span class="info-key">WA</span><span class="info-val">'+waHtml+'</span></div>'
+          +'<div class="info-row"><span class="info-key">Layanan</span><span class="info-val green">'+layananLabel(b.layanan)+'</span></div>'
+          +'<div class="info-row"><span class="info-key">Rambut</span><span class="info-val">'+jenisLabel(b.jenisRambut)+'</span></div>'
+          +'<div class="info-row"><span class="info-key">Lokasi</span><span class="info-val '+(b.lokasi==='homevisit'?'yellow':'green')+'">'+lokasiLabel(b.lokasi)+'</span></div>'
+          +(b.lokasi==='homevisit'?'<div class="info-row"><span class="info-key">Zona</span><span class="info-val yellow">'+zonaLabel(b.ongkirZona)+'</span></div>':'')
+          +(b.alamat&&b.alamat!=='-'?'<div class="info-row"><span class="info-key">Alamat</span><span class="info-val">'+b.alamat+'</span></div>':'')
+          +(b.catatan&&b.catatan!=='-'?'<div class="info-row"><span class="info-key">Catatan</span><span class="info-val">'+b.catatan+'</span></div>':'')
+          +'<button class="cancel-slot-btn" onclick="openModal(\''+ds+'\',\''+slot+'\',\''+safeName+'\')">✕ BATALKAN</button></div>';
       }
-      card.innerHTML=`<div class="slot-time">${slot}</div>${badge}${info}`;
+      card.innerHTML='<div class="slot-time">'+slot+'</div>'+badge+info;
       grid.appendChild(card);
     });
   }
 
-  // CUSTOMER TABLE
-  window.loadCustomerTable=function(){
-    const ds=document.getElementById('customerDatePicker').value||currentDate;
-    const tbody=document.getElementById('customerTableBody');
+  function loadCustomerTable(){
+    var ds=document.getElementById('customerDatePicker').value||currentDate;
+    var tbody=document.getElementById('customerTableBody');
     tbody.innerHTML='<tr><td colspan="11" class="loading-state"><div class="spinner" style="margin:0 auto;"></div></td></tr>';
-    get(ref(db,'bookingDetails/'+dateKey(ds))).then(snap=>{
-      const data=snap.val()||{};
-      const booked=SLOTS.filter(s=>data[s.replace(':','_')]);
-      if(!booked.length){ tbody.innerHTML='<tr><td colspan="11" class="empty-state">Tidak ada booking pada tanggal ini</td></tr>'; return; }
-      tbody.innerHTML=booked.map(slot=>{
-        const b=data[slot.replace(':','_')];
-        const waHtml=b.wa&&b.wa!=='-'?`<a class="wa-link" href="https://wa.me/${b.wa.replace(/[^0-9]/g,'')}" target="_blank">${b.wa}</a>`:'-';
-        const safeName=(b.nama||'').replace(/'/g,'&#39;');
-        return `<tr>
-          <td><strong style="font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--green);">${slot}</strong></td>
-          <td><strong>${b.nama||'-'}</strong></td>
-          <td>${waHtml}</td>
-          <td><span class="tag tag-blue">${layananLabel(b.layanan)}</span></td>
-          <td>${jenisLabel(b.jenisRambut)}</td>
-          <td>${b.lokasi==='homevisit'?'<span class="tag tag-yellow">Home Visit</span>':'<span class="tag tag-green">Datang</span>'}</td>
-          <td style="font-size:11px;">${zonaLabel(b.ongkirZona)}</td>
-          <td style="font-size:11px;max-width:130px;">${b.alamat&&b.alamat!=='-'?b.alamat:'–'}</td>
-          <td style="font-size:11px;max-width:110px;">${b.catatan&&b.catatan!=='-'?b.catatan:'–'}</td>
-          <td style="font-size:10px;font-family:'Space Mono',monospace;white-space:nowrap;">${formatTS(b.timestamp)}</td>
-          <td><button class="tbl-cancel-btn" onclick="openModal('${ds}','${slot}','${safeName}')">✕ Batal</button></td>
-        </tr>`;
+    db.ref('bookingDetails/'+dateKey(ds)).get().then(function(snap){
+      var data=snap.val()||{};
+      var booked=SLOTS.filter(function(s){ return data[s.replace(':','_')]; });
+      if(!booked.length){ tbody.innerHTML='<tr><td colspan="11" class="empty-state">Tidak ada booking</td></tr>'; return; }
+      tbody.innerHTML=booked.map(function(slot){
+        var b=data[slot.replace(':','_')];
+        var waHtml=b.wa&&b.wa!=='-'?'<a class="wa-link" href="https://wa.me/'+b.wa.replace(/[^0-9]/g,'')+'\" target="_blank">'+b.wa+'</a>':'-';
+        var safeName=(b.nama||'').replace(/'/g,'&#39;');
+        return '<tr><td><strong style="font-family:\'Bebas Neue\',sans-serif;font-size:20px;color:var(--green);">'+slot+'</strong></td>'
+          +'<td><strong>'+(b.nama||'-')+'</strong></td><td>'+waHtml+'</td>'
+          +'<td><span class="tag tag-blue">'+layananLabel(b.layanan)+'</span></td>'
+          +'<td>'+jenisLabel(b.jenisRambut)+'</td>'
+          +'<td>'+(b.lokasi==='homevisit'?'<span class="tag tag-yellow">Home Visit</span>':'<span class="tag tag-green">Datang</span>')+'</td>'
+          +'<td style="font-size:11px;">'+zonaLabel(b.ongkirZona)+'</td>'
+          +'<td style="font-size:11px;max-width:130px;">'+(b.alamat&&b.alamat!=='-'?b.alamat:'–')+'</td>'
+          +'<td style="font-size:11px;max-width:110px;">'+(b.catatan&&b.catatan!=='-'?b.catatan:'–')+'</td>'
+          +'<td style="font-size:10px;font-family:\'Space Mono\',monospace;white-space:nowrap;">'+formatTS(b.timestamp)+'</td>'
+          +'<td><button class="tbl-cancel-btn" onclick="openModal(\''+ds+'\',\''+slot+'\',\''+safeName+'\')">✕ Batal</button></td></tr>';
       }).join('');
-    }).catch(e=>{ console.error(e); tbody.innerHTML='<tr><td colspan="11" class="empty-state">❌ Gagal memuat data</td></tr>'; });
-  };
+    }).catch(function(e){ console.error(e); tbody.innerHTML='<tr><td colspan="11" class="empty-state">❌ Gagal memuat</td></tr>'; });
+  }
 
-  // REVENUE
-  window.loadRevenue=function(){
-    const ds=document.getElementById('revDatePicker').value||currentDate;
-    get(ref(db,'bookingDetails/'+dateKey(ds))).then(snap=>{
-      const data=snap.val()||{};
-      let jasa=0,ongkir=0;
-      const counts={potong:0,precision:0,anak:0};
-      Object.values(data).forEach(b=>{
+  function loadRevenue(){
+    var ds=document.getElementById('revDatePicker').value||currentDate;
+    db.ref('bookingDetails/'+dateKey(ds)).get().then(function(snap){
+      var data=snap.val()||{},jasa=0,ongkir=0,counts={potong:0,precision:0,anak:0};
+      Object.values(data).forEach(function(b){
         jasa+=HARGA[b.layanan]||0;
         if(b.lokasi==='homevisit') ongkir+=ONGKIR_MAP[b.ongkirZona]||0;
         if(counts[b.layanan]!==undefined) counts[b.layanan]++;
@@ -491,63 +447,55 @@
       document.getElementById('rev-jasa').textContent='₺'+jasa;
       document.getElementById('rev-ongkir').textContent='₺'+ongkir;
       document.getElementById('rev-total').textContent='₺'+(jasa+ongkir);
-      const rows=[
-        {label:'Potong Rambut',count:counts.potong,price:150},
-        {label:'Precision Cut',count:counts.precision,price:200},
-        {label:'Anak-anak',count:counts.anak,price:120},
-      ].filter(r=>r.count>0);
-      const tbody=document.getElementById('breakdownBody');
+      var rows=[{label:'Potong Rambut',count:counts.potong,price:180},{label:'Precision Cut',count:counts.precision,price:200},{label:'Anak-anak',count:counts.anak,price:150}].filter(function(r){ return r.count>0; });
+      var tbody=document.getElementById('breakdownBody');
       if(!rows.length){ tbody.innerHTML='<tr><td colspan="4" class="empty-state">Belum ada booking</td></tr>'; return; }
-      const total=rows.reduce((s,r)=>s+(r.count*r.price),0);
-      tbody.innerHTML=rows.map(r=>`<tr><td>${r.label}</td><td>${r.count}x</td><td>₺${r.price}</td><td><strong style="color:var(--yellow);">₺${r.count*r.price}</strong></td></tr>`).join('')
-        +`<tr><td colspan="3"><strong>TOTAL JASA</strong></td><td><strong>₺${total}</strong></td></tr>`;
-    }).catch(e=>console.error(e));
-  };
+      var total=rows.reduce(function(s,r){ return s+(r.count*r.price); },0);
+      tbody.innerHTML=rows.map(function(r){ return '<tr><td>'+r.label+'</td><td>'+r.count+'x</td><td>₺'+r.price+'</td><td><strong style="color:var(--yellow);">₺'+(r.count*r.price)+'</strong></td></tr>'; }).join('')+'<tr><td colspan="3"><strong>TOTAL JASA</strong></td><td><strong>₺'+total+'</strong></td></tr>';
+    }).catch(function(e){ console.error(e); });
+  }
 
-  window.loadAllDatesRevenue=function(){
-    const tbody=document.getElementById('allDatesBody');
+  function loadAllDatesRevenue(){
+    var tbody=document.getElementById('allDatesBody');
     tbody.innerHTML='<tr><td colspan="5" class="loading-state"><div class="spinner" style="margin:0 auto;"></div></td></tr>';
-    get(ref(db,'bookingDetails')).then(snap=>{
-      const all=snap.val()||{};
-      const dates=Object.keys(all).sort().reverse();
+    db.ref('bookingDetails').get().then(function(snap){
+      var all=snap.val()||{},dates=Object.keys(all).sort().reverse();
       if(!dates.length){ tbody.innerHTML='<tr><td colspan="5" class="empty-state">Belum ada data</td></tr>'; return; }
-      let gJasa=0,gOngkir=0;
-      const rows=dates.map(dk=>{
-        const ds=dk.replace('slots_','').replace(/_/g,'-');
-        const day=all[dk]; const count=Object.keys(day).length;
-        let j=0,o=0;
-        Object.values(day).forEach(b=>{ j+=HARGA[b.layanan]||0; if(b.lokasi==='homevisit') o+=ONGKIR_MAP[b.ongkirZona]||0; });
+      var gJasa=0,gOngkir=0;
+      var rows=dates.map(function(dk){
+        var ds=dk.replace('slots_','').replace(/_/g,'-'),day=all[dk],count=Object.keys(day).length,j=0,o=0;
+        Object.values(day).forEach(function(b){ j+=HARGA[b.layanan]||0; if(b.lokasi==='homevisit') o+=ONGKIR_MAP[b.ongkirZona]||0; });
         gJasa+=j; gOngkir+=o;
-        return `<tr><td style="font-family:'Space Mono',monospace;font-size:11px;">${ds}</td><td>${count} booking</td><td style="color:var(--yellow);">₺${j}</td><td style="color:var(--blue);">₺${o}</td><td><strong style="color:var(--green);">₺${j+o}</strong></td></tr>`;
+        return '<tr><td style="font-size:11px;">'+ds+'</td><td>'+count+' booking</td><td style="color:var(--yellow);">₺'+j+'</td><td style="color:var(--blue);">₺'+o+'</td><td><strong style="color:var(--green);">₺'+(j+o)+'</strong></td></tr>';
       });
-      rows.push(`<tr><td><strong>GRAND TOTAL</strong></td><td>–</td><td><strong>₺${gJasa}</strong></td><td><strong>₺${gOngkir}</strong></td><td><strong style="font-size:16px;color:var(--green);">₺${gJasa+gOngkir}</strong></td></tr>`);
+      rows.push('<tr><td><strong>GRAND TOTAL</strong></td><td>–</td><td><strong>₺'+gJasa+'</strong></td><td><strong>₺'+gOngkir+'</strong></td><td><strong style="font-size:16px;color:var(--green);">₺'+(gJasa+gOngkir)+'</strong></td></tr>');
       tbody.innerHTML=rows.join('');
-    }).catch(e=>{ console.error(e); tbody.innerHTML='<tr><td colspan="5" class="empty-state">❌ Gagal memuat</td></tr>'; });
-  };
+    }).catch(function(e){ console.error(e); tbody.innerHTML='<tr><td colspan="5" class="empty-state">❌ Gagal memuat</td></tr>'; });
+  }
 
-  // CANCEL MODAL
-  window.openModal=function(ds,slot,nama){
-    pendingCancel={ds,slot};
-    document.getElementById('modalBody').innerHTML=`Batalkan booking sesi <strong>${slot}</strong> atas nama <strong>${nama}</strong>?<br><br>Slot akan kembali kosong.`;
+  function openModal(ds,slot,nama){
+    pendingCancel={ds:ds,slot:slot};
+    document.getElementById('modalBody').innerHTML='Batalkan booking sesi <strong>'+slot+'</strong> atas nama <strong>'+nama+'</strong>?<br><br>Slot akan kembali kosong.';
     document.getElementById('confirmModal').classList.add('show');
     document.getElementById('modalConfirmBtn').onclick=executeCancel;
-  };
-  window.closeModal=function(){ document.getElementById('confirmModal').classList.remove('show'); pendingCancel=null; };
+  }
+  function closeModal(){ document.getElementById('confirmModal').classList.remove('show'); pendingCancel=null; }
 
-  async function executeCancel(){
+  function executeCancel(){
     if(!pendingCancel) return;
-    const{ds,slot}=pendingCancel;
-    const key=slot.replace(':','_');
+    var ds=pendingCancel.ds,slot=pendingCancel.slot,key=slot.replace(':','_');
     closeModal();
-    try{
-      await remove(ref(db,`bookings/${dateKey(ds)}/${key}`));
-      await remove(ref(db,`bookingDetails/${dateKey(ds)}/${key}`));
-      toast(`✓ Booking ${slot} dibatalkan`);
-      loadTotalCount();
-      if(document.getElementById('tab-customer').classList.contains('active')) loadCustomerTable();
-      if(document.getElementById('tab-pemasukan').classList.contains('active')){ loadRevenue(); loadAllDatesRevenue(); }
-    } catch(e){ console.error(e); toast('❌ Gagal membatalkan',true); }
+    db.ref('bookings/'+dateKey(ds)+'/'+key).remove()
+      .then(function(){ return db.ref('bookingDetails/'+dateKey(ds)+'/'+key).remove(); })
+      .then(function(){
+        showToast('✓ Booking '+slot+' dibatalkan');
+        loadTotalCount();
+        if(document.getElementById('tab-customer').classList.contains('active')) loadCustomerTable();
+        if(document.getElementById('tab-pemasukan').classList.contains('active')){ loadRevenue(); loadAllDatesRevenue(); }
+      })
+      .catch(function(e){ console.error(e); showToast('❌ Gagal membatalkan',true); });
   }
 </script>
+
 </body>
 </html>
